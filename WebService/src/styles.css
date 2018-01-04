@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  padding: 0;
+  background: #515151;
+  color: #eee;
+  font: 14px/1.2 "Segoe UI Light","Segoe WP Light","Segoe UI","Segoe WP",Tahoma,Arial,sans-serif;
+}
+
+.clearfix::before, .clearfix::after {
+  content: " ";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+
+.clearfix::after {
+  clear: both;
+}
+
+.clearfix::before, .clearfix::after {
+  content: " ";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+
+.wrapper {
+  clear: both;
+  display: block;
+  margin: 0 auto;
+  width: 95%;
+}

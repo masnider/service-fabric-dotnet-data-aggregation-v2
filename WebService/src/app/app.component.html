@@ -1,0 +1,56 @@
+  <header>
+    <div class="wrapper clearfix header-content">
+      <div class="header-title">
+        <h2>Azure Service Fabric</h2>
+        <h1>Health Metrics</h1>
+      </div>
+      <div class="header-login">
+        <div class="login-user">
+          <div>welcome</div>
+          <h3></h3>
+        </div>
+      </div>
+    </div>
+  </header>
+  <section id="main" class="wrapper clearfix">
+    <div id="infoDiv">
+      <div id="userInfo" class="infoBox">
+        <div id="userStats">
+          <h4>Your Stress Dashboard</h4>
+          <div class="loadingMessage">Gathering data...</div>
+          <div id="userInfo-userHealthIndex" class="name-and-healthbox clearfix"></div>
+          <div id="userInfo-countyHealthIndex" class="name-and-healthbox clearfix"></div>
+          <div id="userUnfo-detailStats">
+            <div id="heartRateTable" class="chartStyle"></div>
+            <h1>Application says what?</h1>
+            <ul>
+              <li *ngFor="let value of apiValues">{{value}}</li>
+            </ul>
+          </div>
+        </div>
+        <div id="doctorListStats">
+          <h4>Doctors in your county</h4>
+          <div class="loadingMessage">Gathering data...</div>
+          <ul class="countyDoctorList"></ul>
+        </div>
+      </div>
+    </div>
+    <div id="map">
+         <!--ng-app="healthApp"
+         ng-controller="homeController"
+         ng-init="init()">-->
+      <div id="dataStats">
+        <ul>
+          <li><span class="statsLabel">Devices:</span><span id="bandsStats">0</span></li>
+          <li><span class="statsLabel">Doctors:</span><span id="doctorsStats">0</span></li>
+          <li><span class="statsLabel">Health Reports:</span><span id="healthReportsStats">0</span></li>
+          <li><span class="statsLabel">Avg. Reports/Sec:</span><span id="messageRate">0</span></li>
+        </ul>
+      </div>
+      <!--<div id="mapContainer">
+        <d3-host val="countyData">
+          <svg id="usMap"></svg>
+        </d3-host>
+      </div>-->
+    </div>
+  </section>
