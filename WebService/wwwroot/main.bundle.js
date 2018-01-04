@@ -70,6 +70,14 @@ var AppComponent = (function () {
         this._httpService.get('/api').subscribe(function (values) {
             _this.apiValues = values.json();
         });
+        this.chartData = JSON.stringify({
+            "key": "Fruit", "value": [
+                { "key": "Apples", "value": 9 },
+                { "key": "Oranges", "value": 3 },
+                { "key": "Grapes", "value": 5 },
+                { "key": "Bananas", "value": 7 }
+            ]
+        });
     };
     AppComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
