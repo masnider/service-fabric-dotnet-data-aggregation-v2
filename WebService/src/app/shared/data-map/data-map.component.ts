@@ -38,7 +38,6 @@ export class DataMapComponent implements OnInit, OnChanges {
 
     createChart() {
         var svg = d3.select("#usMap");
-        console.log(svg.html);
         //var width = ($window.innerWidth) - 350;
         //var height = width * .66;
 
@@ -53,6 +52,7 @@ export class DataMapComponent implements OnInit, OnChanges {
         
         //d3.json("/Content/us-10m.json", function (error, topology: any) {
         d3.json("us-10m.json", function (topology: any) {
+            console.log(topology.objects.counties);
             svg.selectAll(".region")
                 .data(topojson.feature(topology, topology.objects.counties).features)
                 .enter()
