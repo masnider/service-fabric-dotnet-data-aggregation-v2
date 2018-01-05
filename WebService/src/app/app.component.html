@@ -26,6 +26,8 @@
             <ul>
               <li *ngFor="let value of apiValues">{{value}}</li>
             </ul>
+            <h3>Bar Chart1</h3>
+            <app-line-chart *ngIf="chartData" [data]="chartData"></app-line-chart>
           </div>
         </div>
         <div id="doctorListStats">
@@ -47,10 +49,11 @@
           <li><span class="statsLabel">Avg. Reports/Sec:</span><span id="messageRate">0</span></li>
         </ul>
       </div>
-      <!--<div id="mapContainer">
-        <d3-host val="countyData">
+      <div id="mapContainer">
+        <app-data-map></app-data-map>
+        <!--<d3-host val="countyData">
           <svg id="usMap"></svg>
-        </d3-host>
-      </div>-->
+        </d3-host>-->
+      </div>
     </div>
   </section>

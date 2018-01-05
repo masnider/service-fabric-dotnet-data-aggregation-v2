@@ -1,0 +1,16 @@
+/*The #chart id will be used to get a reference to the native element. The components size, colors and other attributes can be controlled with CSS. The default component styles are defined barchart.component.css: */
+
+.d3-chart
+{
+  width: 100%;
+  height: 150px;
+}
+
+.d3-chart .axis path,
+.d3-chart .axis line {
+  stroke: #999;
+}
+
+.d3-chart .axis text {
+  fill: #999;
+}

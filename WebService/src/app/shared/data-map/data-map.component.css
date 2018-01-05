@@ -1,0 +1,22 @@
+#map {
+  padding: 30px 0 0 20px;
+}
+
+#infoDiv {
+  float: left;
+}
+
+#map h4 {
+  text-align: center;
+  margin: 5px;
+}
+
+#usMap {
+}
+
+#colorLegend {
+  width: 500px;
+  height: 20px;
+  margin: 20px auto;
+  background-color: #000;
+}

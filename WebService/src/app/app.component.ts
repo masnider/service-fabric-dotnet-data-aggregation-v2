@@ -8,24 +8,31 @@ import { Http } from '@angular/http';
 })
 export class AppComponent implements OnInit {
 
+    private chartData: Array<any>;
+    private apiValues: string[] = [];
+
     constructor(private _httpService: Http) { }
-
-    apiValues: string[] = [];
-
-    chartData: string;
-
+    
     ngOnInit() {
         this._httpService.get('/api').subscribe(values => {
             this.apiValues = values.json() as string[];
         })
 
-        this.chartData = JSON.stringify ({
-            "key": "Fruit", "value": [
-                { "key": "Apples", "value": 9 },
-                { "key": "Oranges", "value": 3 },
-                { "key": "Grapes", "value": 5 },
-                { "key": "Bananas", "value": 7 }
-            ]
-        })
+        setTimeout(() => {
+            this.generateData();
+
+            // change the data periodically
+            setInterval(() => this.generateData(), 3000);
+        }, 1000);
+    }
+
+    generateData() {
+        this.chartData = [];
+        for (let i = 0; i < (8 + Math.floor(Math.random() * 10)); i++) {
+            this.chartData.push([
+                `Index ${i}`,
+                Math.floor(Math.random() * 100)
+            ]);
+        }
     }
 }

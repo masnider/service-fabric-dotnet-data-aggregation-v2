@@ -15,7 +15,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <Content Remove="wwwroot\us-10m.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\us-10m.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
