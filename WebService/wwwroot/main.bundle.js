@@ -25,7 +25,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "header {\r\n  background: #1a1a1a;\r\n}\r\n\r\n  header .header-content {\r\n    padding-top: 10px;\r\n  }\r\n\r\n  header .header-title {\r\n    float: left;\r\n  }\r\n\r\n    header .header-title h2 {\r\n      font-size: 24px;\r\n      font-weight: 100;\r\n      color: #FFF;\r\n      margin: 0;\r\n    }\r\n\r\n    header .header-title h1 {\r\n      font-size: 48px;\r\n      font-weight: 100;\r\n      color: #FF8A00;\r\n      margin: 0 0 20px 0;\r\n    }\r\n\r\n  header .header-login {\r\n    float: right;\r\n    margin-top: 35px;\r\n    line-height: 20px;\r\n  }\r\n\r\n    header .header-login h3 {\r\n      margin: 0;\r\n      padding: 0;\r\n    }\r\n\r\n    header .header-login .login-links {\r\n      float: left;\r\n      text-align: right;\r\n      padding: 0 10px 0 0;\r\n      height: 50px;\r\n      border-right: 1px solid #CCC;\r\n    }\r\n\r\n      header .header-login .login-links a {\r\n        display: block;\r\n        color: #89c402;\r\n      }\r\n\r\n    header .header-login .login-user {\r\n      float: left;\r\n      margin: 0 0 0 10px;\r\n    }\r\n\r\n\r\nsection#main {\r\n  margin: 20px auto;\r\n}\r\n\r\nfooter {\r\n  border-top: 1px solid #333;\r\n}\r\n\r\n#dataStats {\r\n  text-align: center;\r\n  margin: 0 0 10px 0;\r\n}\r\n\r\n  #dataStats ul {\r\n    margin: 0;\r\n    padding: 0;\r\n  }\r\n\r\n    #dataStats ul li {\r\n      list-style: none;\r\n      display: inline;\r\n      margin: 0 10px;\r\n      padding: 0;\r\n      font-size: 24px;\r\n    }\r\n\r\n  #dataStats span {\r\n    font-weight: bold;\r\n    color: #89c402;\r\n  }\r\n\r\n    #dataStats span.statsLabel {\r\n      margin-right: 10px;\r\n      font-weight: normal;\r\n      color: #EEE;\r\n    }\r\n\r\n#infoDiv {\r\n  border-right: 1px solid #333;\r\n  /*width: 300px;*/\r\n  width: 20vw;  /*check*/\r\n  min-height: 600px;\r\n  padding: 10px;\r\n}\r\n\r\n.loadingMessage {\r\n  margin: 10px auto;\r\n  font-style: italic;\r\n}\r\n\r\n.healthBox {\r\n  width: 25px;\r\n  height: 20px;\r\n  border: 1px solid #DDD;\r\n  text-align: center;\r\n  vertical-align: middle;\r\n  line-height: 20px;\r\n  color: black;\r\n}\r\n\r\n.healthBox-noinfo {\r\n  width: 25px;\r\n  height: 20px;\r\n  border: 1px solid #DDD;\r\n  text-align: center;\r\n  vertical-align: middle;\r\n  line-height: 20px;\r\n  color: white;\r\n}\r\n\r\n.countyDoctorList {\r\n  list-style-type: none;\r\n}\r\n\r\n  .countyDoctorList li {\r\n    margin-bottom: 5px;\r\n  }\r\n\r\n.name-and-healthbox span {\r\n  float: left;\r\n  margin: 0 0 0 10px;\r\n  padding: 0;\r\n}\r\n\r\n.name-and-healthbox .healthBox {\r\n  float: left;\r\n}\r\n\r\n.name-and-healthbox .healthBox-black {\r\n  float: left;\r\n}\r\n\r\n.name-and-healthbox .healthBox-noinfo {\r\n  float: left;\r\n}\r\n\r\n.infoBox h4 {\r\n  font-size: 16px;\r\n  background: #111;\r\n  padding: 4px;\r\n}\r\n\r\n#userInfo h4 {\r\n  color: #FF8A00;\r\n}\r\n\r\n#userStats #userUnfo-detailStats {\r\n  margin-top: 10px;\r\n}\r\n\r\n#userStats .name-and-healthbox span {\r\n  font-weight: bold;\r\n}\r\n\r\n#userStats .chartStyle {\r\n  height: 150px;\r\n  width: 300px;\r\n  margin: 0;\r\n}\r\n\r\n#userStats .name-and-healthbox {\r\n  margin-bottom: 5px;\r\n}\r\n\r\n#doctorListStats {\r\n  min-height: 300px;\r\n  overflow-y: auto;\r\n  overflow-x: hidden;\r\n}\r\n\r\n#doctorInfo h4 {\r\n  color: #26C8FF;\r\n}\r\n\r\n#doctorInfo .name-and-healthbox {\r\n  margin: 5px 0;\r\n}\r\n\r\n  #doctorInfo .name-and-healthbox span {\r\n    font-weight: bold;\r\n  }\r\n\r\n#doctorInfo #patientInfoTable {\r\n  margin-top: 20px;\r\n}\r\n\r\n  #doctorInfo #patientInfoTable td {\r\n    padding: 2px 5px;\r\n    max-width: 160px;\r\n    overflow: hidden;\r\n  }\r\n\r\n#map {\r\n  padding: 30px 0 0 20px;\r\n  position: absolute;\r\n  margin-left: 20vw;\r\n  width: 80vw;\r\n  overflow-x: hidden;\r\n  overflow-y: hidden;\r\n  display: block;\r\n}\r\n\r\n#mapContainer {\r\n  width: 100vw;\r\n  height: 100vh;\r\n  overflow-x: hidden;\r\n  overflow-y: hidden;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  -ms-flex-line-pack: center;\r\n      align-content: center;\r\n}\r\n", ""]);
+exports.push([module.i, "header {\r\n  background: #1a1a1a;\r\n}\r\n\r\n  header .header-content {\r\n    padding-top: 10px;\r\n  }\r\n\r\n  header .header-title {\r\n    float: left;\r\n  }\r\n\r\n    header .header-title h2 {\r\n      font-size: 24px;\r\n      font-weight: 100;\r\n      color: #FFF;\r\n      margin: 0;\r\n    }\r\n\r\n    header .header-title h1 {\r\n      font-size: 48px;\r\n      font-weight: 100;\r\n      color: #FF8A00;\r\n      margin: 0 0 20px 0;\r\n    }\r\n\r\n  header .header-login {\r\n    float: right;\r\n    margin-top: 35px;\r\n    line-height: 20px;\r\n  }\r\n\r\n    header .header-login h3 {\r\n      margin: 0;\r\n      padding: 0;\r\n    }\r\n\r\n    header .header-login .login-links {\r\n      float: left;\r\n      text-align: right;\r\n      padding: 0 10px 0 0;\r\n      height: 50px;\r\n      border-right: 1px solid #CCC;\r\n    }\r\n\r\n      header .header-login .login-links a {\r\n        display: block;\r\n        color: #89c402;\r\n      }\r\n\r\n    header .header-login .login-user {\r\n      float: left;\r\n      margin: 0 0 0 10px;\r\n    }\r\n\r\n\r\nsection#main {\r\n  margin: 20px auto;\r\n}\r\n\r\nfooter {\r\n  border-top: 1px solid #333;\r\n}\r\n\r\n#dataStats {\r\n  text-align: center;\r\n  margin: 0 0 10px 0;\r\n}\r\n\r\n  #dataStats ul {\r\n    margin: 0;\r\n    padding: 0;\r\n  }\r\n\r\n    #dataStats ul li {\r\n      list-style: none;\r\n      display: inline;\r\n      margin: 0 10px;\r\n      padding: 0;\r\n      font-size: 24px;\r\n    }\r\n\r\n  #dataStats span {\r\n    font-weight: bold;\r\n    color: #89c402;\r\n  }\r\n\r\n    #dataStats span.statsLabel {\r\n      margin-right: 10px;\r\n      font-weight: normal;\r\n      color: #EEE;\r\n    }\r\n\r\n#infoDiv {\r\n  border-right: 1px solid #333;\r\n  /*width: 300px;*/\r\n  width: 20vw;  /*check*/\r\n  min-height: 600px;\r\n  padding: 10px;\r\n}\r\n\r\n.loadingMessage {\r\n  margin: 10px auto;\r\n  font-style: italic;\r\n}\r\n\r\n.healthBox {\r\n  width: 25px;\r\n  height: 20px;\r\n  border: 1px solid #DDD;\r\n  text-align: center;\r\n  vertical-align: middle;\r\n  line-height: 20px;\r\n  color: black;\r\n}\r\n\r\n.healthBox-noinfo {\r\n  width: 25px;\r\n  height: 20px;\r\n  border: 1px solid #DDD;\r\n  text-align: center;\r\n  vertical-align: middle;\r\n  line-height: 20px;\r\n  color: white;\r\n}\r\n\r\n.countyDoctorList {\r\n  list-style-type: none;\r\n}\r\n\r\n  .countyDoctorList li {\r\n    margin-bottom: 5px;\r\n  }\r\n\r\n.name-and-healthbox span {\r\n  float: left;\r\n  margin: 0 0 0 10px;\r\n  padding: 0;\r\n}\r\n\r\n.name-and-healthbox .healthBox {\r\n  float: left;\r\n}\r\n\r\n.name-and-healthbox .healthBox-black {\r\n  float: left;\r\n}\r\n\r\n.name-and-healthbox .healthBox-noinfo {\r\n  float: left;\r\n}\r\n\r\n.infoBox h4 {\r\n  font-size: 16px;\r\n  background: #111;\r\n  padding: 4px;\r\n}\r\n\r\n#userInfo h4 {\r\n  color: #FF8A00;\r\n}\r\n\r\n#userStats #userUnfo-detailStats {\r\n  margin-top: 10px;\r\n}\r\n\r\n#userStats .name-and-healthbox span {\r\n  font-weight: bold;\r\n}\r\n\r\n#userStats .chartStyle {\r\n  height: 150px;\r\n  width: 300px;\r\n  margin: 0;\r\n}\r\n\r\n#userStats .name-and-healthbox {\r\n  margin-bottom: 5px;\r\n}\r\n\r\n#doctorListStats {\r\n  min-height: 300px;\r\n  overflow-y: auto;\r\n  overflow-x: hidden;\r\n}\r\n\r\n#doctorInfo h4 {\r\n  color: #26C8FF;\r\n}\r\n\r\n#doctorInfo .name-and-healthbox {\r\n  margin: 5px 0;\r\n}\r\n\r\n  #doctorInfo .name-and-healthbox span {\r\n    font-weight: bold;\r\n  }\r\n\r\n#doctorInfo #patientInfoTable {\r\n  margin-top: 20px;\r\n}\r\n\r\n  #doctorInfo #patientInfoTable td {\r\n    padding: 2px 5px;\r\n    max-width: 160px;\r\n    overflow: hidden;\r\n  }\r\n\r\n#map {\r\n  padding: 30px 0 0 20px;\r\n  position: absolute;\r\n  margin-left: 20vw;\r\n  width: 80vw;\r\n  overflow-x: hidden;\r\n  overflow-y: hidden;\r\n  display: block;\r\n}\r\n\r\n#mapContainer {\r\n  width: 100vw;\r\n  height: 100vh;\r\n  overflow-x: hidden;\r\n  overflow-y: hidden;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  -ms-flex-line-pack: center;\r\n      align-content: center;\r\n  float:left;\r\n}\r\n", ""]);
 
 // exports
 
@@ -38,7 +38,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "  <header>\r\n    <div class=\"wrapper clearfix header-content\">\r\n      <div class=\"header-title\">\r\n        <h2>Azure Service Fabric</h2>\r\n        <h1>Health Metrics</h1>\r\n      </div>\r\n      <div class=\"header-login\">\r\n        <div class=\"login-user\">\r\n          <div>welcome</div>\r\n          <h3></h3>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </header>\r\n  <section id=\"main\" class=\"wrapper clearfix\">\r\n    <div id=\"infoDiv\">\r\n      <div id=\"userInfo\" class=\"infoBox\">\r\n        <div id=\"userStats\">\r\n          <h4>Your Stress Dashboard</h4>\r\n          <div class=\"loadingMessage\">Gathering data...</div>\r\n          <div id=\"userInfo-userHealthIndex\" class=\"name-and-healthbox clearfix\"></div>\r\n          <div id=\"userInfo-countyHealthIndex\" class=\"name-and-healthbox clearfix\"></div>\r\n          <div id=\"userUnfo-detailStats\">\r\n            <div id=\"heartRateTable\" class=\"chartStyle\"></div>\r\n            <h1>Application says what?</h1>\r\n            <ul>\r\n              <li *ngFor=\"let value of apiValues\">{{value}}</li>\r\n            </ul>\r\n            <h3>Bar Chart1</h3>\r\n            <app-line-chart *ngIf=\"chartData\" [data]=\"chartData\"></app-line-chart>\r\n          </div>\r\n        </div>\r\n        <div id=\"doctorListStats\">\r\n          <h4>Doctors in your county</h4>\r\n          <div class=\"loadingMessage\">Gathering data...</div>\r\n          <ul class=\"countyDoctorList\"></ul>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div id=\"map\">\r\n      <div id=\"dataStats\">\r\n        <ul>\r\n          <li><span class=\"statsLabel\">Devices:</span><span id=\"bandsStats\">0</span></li>\r\n          <li><span class=\"statsLabel\">Doctors:</span><span id=\"doctorsStats\">0</span></li>\r\n          <li><span class=\"statsLabel\">Health Reports:</span><span id=\"healthReportsStats\">0</span></li>\r\n          <li><span class=\"statsLabel\">Avg. Reports/Sec:</span><span id=\"messageRate\">0</span></li>\r\n        </ul>\r\n      </div>\r\n      <div id=\"mapContainer\">\r\n        <app-data-map></app-data-map>\r\n      </div>\r\n    </div>\r\n  </section>\r\n"
+module.exports = "  <header>\r\n    <div class=\"wrapper clearfix header-content\">\r\n      <div class=\"header-title\">\r\n        <h2>Azure Service Fabric</h2>\r\n        <h1>Health Metrics</h1>\r\n      </div>\r\n      <div class=\"header-login\">\r\n        <div class=\"login-user\">\r\n          <div>welcome</div>\r\n          <h3></h3>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </header>\r\n  <section id=\"main\" class=\"wrapper clearfix\">\r\n    <div id=\"infoDiv\">\r\n      <div id=\"userInfo\" class=\"infoBox\">\r\n        <div id=\"userStats\">\r\n          <h4>Your Stress Dashboard</h4>\r\n          <div class=\"loadingMessage\">Gathering data...</div>\r\n          <div id=\"userInfo-userHealthIndex\" class=\"name-and-healthbox clearfix\"></div>\r\n          <div id=\"userInfo-countyHealthIndex\" class=\"name-and-healthbox clearfix\"></div>\r\n          <div id=\"userUnfo-detailStats\">\r\n            <div id=\"heartRateTable\" class=\"chartStyle\"></div>\r\n            <h1>Application says what?</h1>\r\n            <ul>\r\n              <li *ngFor=\"let value of apiValues\">{{value}}</li>\r\n            </ul>\r\n            <h3>Bar Chart1</h3>\r\n            <app-line-chart *ngIf=\"chartData\" [data]=\"chartData\"></app-line-chart>\r\n          </div>\r\n        </div>\r\n        <div id=\"doctorListStats\">\r\n          <h4>Doctors in your county</h4>\r\n          <div class=\"loadingMessage\">Gathering data...</div>\r\n          <ul class=\"countyDoctorList\"></ul>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div id=\"map\">\r\n      <div id=\"dataStats\">\r\n        <ul>\r\n          <li><span class=\"statsLabel\">Devices:</span><span id=\"bandsStats\">0</span></li>\r\n          <li><span class=\"statsLabel\">Doctors:</span><span id=\"doctorsStats\">0</span></li>\r\n          <li><span class=\"statsLabel\">Health Reports:</span><span id=\"healthReportsStats\">0</span></li>\r\n          <li><span class=\"statsLabel\">Avg. Reports/Sec:</span><span id=\"messageRate\">0</span></li>\r\n        </ul>\r\n      </div>\r\n      <div id=\"mapContainer\">\r\n        <app-data-map [mapData]=\"mapData\"></app-data-map>\r\n      </div>\r\n    </div>\r\n  </section>\r\n"
 
 /***/ }),
 
@@ -71,18 +71,30 @@ var AppComponent = (function () {
             _this.apiValues = values.json();
         });
         setTimeout(function () {
-            _this.generateData();
+            _this.generateChartData();
+            _this.generateMapData();
             // change the data periodically
-            setInterval(function () { return _this.generateData(); }, 3000);
+            setInterval(function () { return _this.generateChartData(); }, 3000);
+            setInterval(function () { return _this.generateMapData(); }, 3000);
         }, 1000);
     };
-    AppComponent.prototype.generateData = function () {
+    AppComponent.prototype.generateChartData = function () {
         this.chartData = [];
         for (var i = 0; i < (8 + Math.floor(Math.random() * 10)); i++) {
             this.chartData.push([
                 "Index " + i,
                 Math.floor(Math.random() * 100)
             ]);
+        }
+    };
+    AppComponent.prototype.generateMapData = function () {
+        this.mapData = [];
+        for (var i = 1001; i <= 56045; i++) {
+            var num = i.toString();
+            if (num.length == 4) {
+                num.padStart(5, "0");
+            }
+            this.mapData.push([i, Math.floor(Math.random() * 100)]);
         }
     };
     AppComponent = __decorate([
@@ -159,7 +171,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "#infoDiv {\r\n  float: left;\r\n}\r\n\r\n#usMap {\r\n  width: 100vw;\r\n  height: 100vw;\r\n  overflow-x: hidden;\r\n}\r\n", ""]);
+exports.push([module.i, "#infoDiv {\r\n  float: left;\r\n}\r\n\r\n#usMap {\r\n  width: 100vw;\r\n  height: 100vw;\r\n  overflow-x: hidden;\r\n  display: block;\r\n}\r\n", ""]);
 
 // exports
 
@@ -172,7 +184,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/shared/data-map/data-map.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div val=\"countyData\">\r\n  <svg id=\"usMap\"></svg>\r\n</div>\r\n"
+module.exports = "<svg id=\"usMap\" #chart></svg>\r\n"
 
 /***/ }),
 
@@ -198,30 +210,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var DataMapComponent = (function () {
     function DataMapComponent() {
-        this.margin = { top: 20, bottom: 20, left: 20, right: 20 };
     }
     DataMapComponent.prototype.ngOnInit = function () {
-        this.createChart();
-        //if (this.data) {
-        //    this.updateChart();
-        //}
-    };
-    DataMapComponent.prototype.ngOnChanges = function () {
-        if (this.chart) {
-            this.updateChart();
+        this.createMap();
+        if (this.mapData) {
+            this.updateMap();
         }
     };
-    DataMapComponent.prototype.createChart = function () {
+    DataMapComponent.prototype.ngOnChanges = function () {
+        if (this.mapData) {
+            this.updateMap();
+        }
+    };
+    DataMapComponent.prototype.createMap = function () {
+        //const element = this.chartContainer.nativeElement;
+        //console.log("This is" + this);
+        //console.log("chartContainer is " + this.chartContainer);
+        //console.log("nativeElement is" + this.chartContainer.nativeElement);
+        //console.log(element);
+        //this.width = element.width.baseVal.value
+        //this.height = element.height.baseVal.value;
         var svg = __WEBPACK_IMPORTED_MODULE_1_d3__["i" /* select */]("#usMap");
-        //var width = ($window.innerWidth) - 350;
-        //var height = width * .66;
-        //angular.element($window)
-        var projection = __WEBPACK_IMPORTED_MODULE_1_d3__["c" /* geoAlbersUsa */]();
-        //.scale(width)
-        //.translate([width / 2, height / 2]);
+        //.attr('width', this.width)
+        //.attr('height', this.height);
+        //console.log("width = " + this.width);
+        //console.log("height = " + this.height);
+        var projection = __WEBPACK_IMPORTED_MODULE_1_d3__["c" /* geoAlbersUsa */]()
+            .scale(1350)
+            .translate([1400 / 2, 650 / 2]);
         var path = __WEBPACK_IMPORTED_MODULE_1_d3__["d" /* geoPath */]()
             .projection(projection);
-        //d3.json("/Content/us-10m.json", function (error, topology: any) {
         __WEBPACK_IMPORTED_MODULE_1_d3__["e" /* json */]("us-10m.json", function (topology) {
             console.log(topology.objects.counties);
             svg.selectAll(".region")
@@ -233,38 +251,25 @@ var DataMapComponent = (function () {
                 .attr("id", function (d) { return "p" + d.id; });
         });
     };
-    DataMapComponent.prototype.updateChart = function () {
-        //// update scales & axis
-        //this.xScale.domain(this.data.map(d => d[0]));
-        //this.yScale.domain([0, d3.max(this.data, d => d[1])]);
-        //this.colors.domain([0, this.data.length]);
-        //this.xAxis.transition().call(d3.axisBottom(this.xScale));
-        //this.yAxis.transition().call(d3.axisLeft(this.yScale));
-        //const update = this.chart.selectAll('.bar')
-        //    .data(this.data);
-        //// remove exiting bars
-        //update.exit().remove();
-        //// update existing bars
-        //this.chart.selectAll('.bar').transition()
-        //    .attr('x', d => this.xScale(d[0]))
-        //    .attr('y', d => this.yScale(d[1]))
-        //    .attr('width', d => this.xScale.bandwidth())
-        //    .attr('height', d => this.height - this.yScale(d[1]))
-        //    .style('fill', (d, i) => this.colors(i));
-        //// add new bars
-        //update
-        //    .enter()
-        //    .append('rect')
-        //    .attr('class', 'bar')
-        //    .attr('x', d => this.xScale(d[0]))
-        //    .attr('y', d => this.yScale(0))
-        //    .attr('width', this.xScale.bandwidth())
-        //    .attr('height', 0)
-        //    .style('fill', (d, i) => this.colors(i))
-        //    .transition()
-        //    .delay((d, i) => i * 10)
-        //    .attr('y', d => this.yScale(d[1]))
-        //    .attr('height', d => this.height - this.yScale(d[1]));
+    DataMapComponent.prototype.updateMap = function () {
+        //console.log("Updating map");
+        //console.log(this.mapData);
+        this.mapData.forEach(function (data) {
+            __WEBPACK_IMPORTED_MODULE_1_d3__["i" /* select */]("path#p" + data[0])
+                .transition()
+                .duration(500)
+                .attr('fill', function (d) {
+                return 'hsl(' + data[1] + ', 100%, 50%)';
+            });
+        });
+    };
+    DataMapComponent.prototype.computeColor = function (HealthIndex) {
+        if (HealthIndex.mode == false) {
+            return 'hsl(0, 0%, ' + HealthIndex.value + '%)';
+        }
+        else {
+            return 'hsl(' + HealthIndex.value + ', 100%, 50%)';
+        }
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_3" /* ViewChild */])('chart'),
@@ -273,7 +278,7 @@ var DataMapComponent = (function () {
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Input */])(),
         __metadata("design:type", Array)
-    ], DataMapComponent.prototype, "data", void 0);
+    ], DataMapComponent.prototype, "mapData", void 0);
     DataMapComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-data-map',

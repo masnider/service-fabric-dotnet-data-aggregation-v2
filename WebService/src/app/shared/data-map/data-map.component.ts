@@ -10,47 +10,53 @@ import * as topojson from 'topojson';
 })
 export class DataMapComponent implements OnInit, OnChanges {
     @ViewChild('chart') private chartContainer: ElementRef;
-    @Input() private data: Array<any>;
-    private margin: any = { top: 20, bottom: 20, left: 20, right: 20 };
+    @Input() private mapData: Array<any>;
     private chart: any;
     private width: number;
     private height: number;
-    private xScale: any;
-    private yScale: any;
-    private colors: any;
-    private xAxis: any;
-    private yAxis: any;
 
     constructor() { }
 
     ngOnInit() {
-        this.createChart();
-        //if (this.data) {
-        //    this.updateChart();
-        //}
-    }
-
-    ngOnChanges() {
-        if (this.chart) {
-            this.updateChart();
+        this.createMap();
+        if (this.mapData) {
+            this.updateMap();
         }
     }
 
-    createChart() {
-        var svg = d3.select("#usMap");
-        //var width = ($window.innerWidth) - 350;
-        //var height = width * .66;
+    ngOnChanges() {
+        if (this.mapData) {
+            this.updateMap();
+        }
+    }
 
-        //angular.element($window)
+    createMap() {
 
-        var projection = d3.geoAlbersUsa();
-            //.scale(width)
-            //.translate([width / 2, height / 2]);
+        //const element = this.chartContainer.nativeElement;
+
+        //console.log("This is" + this);
+        //console.log("chartContainer is " + this.chartContainer);
+        //console.log("nativeElement is" + this.chartContainer.nativeElement);
+
+        //console.log(element);
+
+        //this.width = element.width.baseVal.value
+        //this.height = element.height.baseVal.value;
+
+        const svg = d3.select("#usMap");
+        //.attr('width', this.width)
+        //.attr('height', this.height);
+
+        //console.log("width = " + this.width);
+        //console.log("height = " + this.height);
+
+        var projection = d3.geoAlbersUsa()
+          .scale(1350)
+          .translate([1400 / 2, 650 / 2]);
 
         var path = d3.geoPath()
             .projection(projection);
-        
-        //d3.json("/Content/us-10m.json", function (error, topology: any) {
+
         d3.json("us-10m.json", function (topology: any) {
             console.log(topology.objects.counties);
             svg.selectAll(".region")
@@ -63,41 +69,25 @@ export class DataMapComponent implements OnInit, OnChanges {
         });
     }
 
-    updateChart() {
-        //// update scales & axis
-        //this.xScale.domain(this.data.map(d => d[0]));
-        //this.yScale.domain([0, d3.max(this.data, d => d[1])]);
-        //this.colors.domain([0, this.data.length]);
-        //this.xAxis.transition().call(d3.axisBottom(this.xScale));
-        //this.yAxis.transition().call(d3.axisLeft(this.yScale));
+    updateMap() {
+        //console.log("Updating map");
+        //console.log(this.mapData);
+        this.mapData.forEach((data) => {
+            d3.select("path#p" + data[0])
+                .transition()
+                .duration(500)
+                .attr('fill', function (d) {
+                    return 'hsl(' + data[1] + ', 100%, 50%)';
+                });
+        });
+    }
 
-        //const update = this.chart.selectAll('.bar')
-        //    .data(this.data);
-
-        //// remove exiting bars
-        //update.exit().remove();
-
-        //// update existing bars
-        //this.chart.selectAll('.bar').transition()
-        //    .attr('x', d => this.xScale(d[0]))
-        //    .attr('y', d => this.yScale(d[1]))
-        //    .attr('width', d => this.xScale.bandwidth())
-        //    .attr('height', d => this.height - this.yScale(d[1]))
-        //    .style('fill', (d, i) => this.colors(i));
-
-        //// add new bars
-        //update
-        //    .enter()
-        //    .append('rect')
-        //    .attr('class', 'bar')
-        //    .attr('x', d => this.xScale(d[0]))
-        //    .attr('y', d => this.yScale(0))
-        //    .attr('width', this.xScale.bandwidth())
-        //    .attr('height', 0)
-        //    .style('fill', (d, i) => this.colors(i))
-        //    .transition()
-        //    .delay((d, i) => i * 10)
-        //    .attr('y', d => this.yScale(d[1]))
-        //    .attr('height', d => this.height - this.yScale(d[1]));
+    computeColor(HealthIndex) {
+        if (HealthIndex.mode == false) {
+            return 'hsl(0, 0%, ' + HealthIndex.value + '%)';
+        }
+        else {
+            return 'hsl(' + HealthIndex.value + ', 100%, 50%)';
+        }
     }
 }

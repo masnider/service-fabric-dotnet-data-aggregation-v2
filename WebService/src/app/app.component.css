@@ -223,4 +223,5 @@ footer {
   overflow-y: hidden;
   justify-content: center;
   align-content: center;
+  float:left;
 }
