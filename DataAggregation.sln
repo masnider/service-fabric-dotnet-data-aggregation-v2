@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "HealthMetrics", "HealthMetrics\HealthMetrics.sfproj", "{FF09C711-C0E8-4191-B639-779ED1DED513}"
+Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "DataAggregation", "DataAggregation\DataAggregation.sfproj", "{FF09C711-C0E8-4191-B639-779ED1DED513}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebService", "WebService\WebService.csproj", "{E1B56872-B7BC-4C2C-B8FB-1D66767C405E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAggregation.WebService", "WebService\DataAggregation.WebService.csproj", "{E1B56872-B7BC-4C2C-B8FB-1D66767C405E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

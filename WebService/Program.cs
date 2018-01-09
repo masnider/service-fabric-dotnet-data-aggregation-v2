@@ -1,4 +1,4 @@
-﻿using Microsoft.ServiceFabric.Services.Runtime;
+using Microsoft.ServiceFabric.Services.Runtime;
 using System;
 using System.Diagnostics;
 using System.Threading;
@@ -20,7 +20,7 @@ namespace WebService
                 // When Service Fabric creates an instance of this service type,
                 // an instance of the class is created in this host process.
 
-                ServiceRuntime.RegisterServiceAsync("HealthMetrics.WebServiceType",
+                ServiceRuntime.RegisterServiceAsync("DataAggregation.WebServiceType",
                     context => new WebService(context)).GetAwaiter().GetResult();
 
                 ServiceEventSource.Current.ServiceTypeRegistered(Process.GetCurrentProcess().Id, typeof(WebService).Name);

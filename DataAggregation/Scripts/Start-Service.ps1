@@ -8,8 +8,8 @@ $highkey = "9223372036854775807"
 $countyLowKey = 0
 $countyHighKey = 57000
 
-$appName = "fabric:/HealthMetrics"
-$appType = "HealthMetricsType"
+$appName = "fabric:/DataAggregation"
+$appType = "DataAggregationType"
 $appInitialVersion = "1.0.0"
 
 if($singleNode)
@@ -48,26 +48,26 @@ else
     }
 }
 
-$webServiceType = "HealthMetrics.WebServiceType"
-$webServiceName = "HealthMetrics.WebService"
+$webServiceType = "DataAggregation.WebServiceType"
+$webServiceName = "DataAggregation.WebService"
 
-$nationalServiceType = "HealthMetrics.NationalServiceType"
-$nationalServiceName = "HealthMetrics.NationalService"
+$nationalServiceType = "DataAggregation.NationalServiceType"
+$nationalServiceName = "DataAggregation.NationalService"
 $nationalServiceReplicaCount = @{$true=1;$false=3}[$singleNode -eq $true]  
 
-$countyServiceType = "HealthMetrics.CountyServiceType"
-$countyServiceName = "HealthMetrics.CountyService"
+$countyServiceType = "DataAggregation.CountyServiceType"
+$countyServiceName = "DataAggregation.CountyService"
 $countyServiceReplicaCount = @{$true=1;$false=3}[$singleNode -eq $true]  
 
-$bandCreationServiceType = "HealthMetrics.BandCreationServiceType"
-$bandCreationServiceName = "HealthMetrics.BandCreationService"
+$bandCreationServiceType = "DataAggregation.BandCreationServiceType"
+$bandCreationServiceName = "DataAggregation.BandCreationService"
 
-$doctorServiceType = "HealthMetrics.DoctorServiceType"
-$doctorServiceName = "HealthMetrics.DoctorService"
+$doctorServiceType = "DataAggregation.DoctorServiceType"
+$doctorServiceName = "DataAggregation.DoctorService"
 $doctorServiceReplicaCount = @{$true=1;$false=3}[$singleNode -eq $true]
 
 $bandActorServiceType = "BandActorServiceType"
-$bandActorServiceName= "HealthMetrics.BandActorService"
+$bandActorServiceName= "DataAggregation.BandActorService"
 $bandActorReplicaCount = @{$true=1;$false=3}[$singleNode -eq $true]
 
 New-ServiceFabricService -ServiceTypeName $webServiceType -Stateless -ApplicationName $appName -ServiceName "$appName/$webServiceName" -PartitionSchemeSingleton -InstanceCount $webServiceInstanceCount -PlacementConstraint $webServiceConstraint -ServicePackageActivationMode ExclusiveProcess
