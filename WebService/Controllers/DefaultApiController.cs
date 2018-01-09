@@ -7,8 +7,6 @@ using System.Fabric;
 using System.Fabric.Description;
 using System.Collections.ObjectModel;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace WebService
 {
   [Route("api")]
@@ -23,7 +21,8 @@ namespace WebService
     // GET: api
     public IEnumerable<string> Get()
     {
-      return new string[] { "value1", "value2" };
+      Random r = new Random();
+      return new string[] { "value1" + r.Next(), "value2" + r.Next() };
     }
 
     // GET api/values/5

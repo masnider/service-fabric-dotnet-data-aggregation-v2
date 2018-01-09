@@ -67,15 +67,13 @@ var AppComponent = (function () {
     }
     AppComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this._httpService.get('/api').subscribe(function (values) {
-            _this.apiValues = values.json();
-        });
         setTimeout(function () {
             _this.generateChartData();
             _this.generateMapData();
             // change the data periodically
             setInterval(function () { return _this.generateChartData(); }, 3000);
             setInterval(function () { return _this.generateMapData(); }, 3000);
+            setInterval(function () { return _this.refreshValues(); }, 3000);
         }, 1000);
     };
     AppComponent.prototype.generateChartData = function () {
@@ -96,6 +94,12 @@ var AppComponent = (function () {
             }
             this.mapData.push([i, Math.floor(Math.random() * 100)]);
         }
+    };
+    AppComponent.prototype.refreshValues = function () {
+        var _this = this;
+        this._httpService.get('/api').subscribe(function (values) {
+            _this.apiValues = values.json();
+        });
     };
     AppComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({

@@ -15,10 +15,7 @@ export class AppComponent implements OnInit {
     constructor(private _httpService: Http) { }
 
     ngOnInit() {
-        this._httpService.get('/api').subscribe(values => {
-            this.apiValues = values.json() as string[];
-        })
-
+        
         setTimeout(() => {
             this.generateChartData();
             this.generateMapData();
@@ -26,6 +23,7 @@ export class AppComponent implements OnInit {
             // change the data periodically
             setInterval(() => this.generateChartData(), 3000);
             setInterval(() => this.generateMapData(), 3000);
+            setInterval(() => this.refreshValues(), 3000);
         }, 1000);
     }
 
@@ -52,5 +50,12 @@ export class AppComponent implements OnInit {
             
             this.mapData.push([i, Math.floor(Math.random() * 100)]);
         }
+    }
+
+    refreshValues()
+    {
+        this._httpService.get('/api').subscribe(values => {
+            this.apiValues = values.json() as string[];
+        })
     }
 }

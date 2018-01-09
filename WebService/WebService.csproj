@@ -35,4 +35,10 @@
     <PackageReference Include="Microsoft.ServiceFabric.Services" Version="2.8.232" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="src\us-10m.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
