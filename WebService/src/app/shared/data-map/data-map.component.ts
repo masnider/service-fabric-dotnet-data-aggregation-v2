@@ -31,28 +31,11 @@ export class DataMapComponent implements OnInit, OnChanges {
     }
 
     createMap() {
-
-        //const element = this.chartContainer.nativeElement;
-
-        //console.log("This is" + this);
-        //console.log("chartContainer is " + this.chartContainer);
-        //console.log("nativeElement is" + this.chartContainer.nativeElement);
-
-        //console.log(element);
-
-        //this.width = element.width.baseVal.value
-        //this.height = element.height.baseVal.value;
-
         const svg = d3.select("#usMap");
-        //.attr('width', this.width)
-        //.attr('height', this.height);
-
-        //console.log("width = " + this.width);
-        //console.log("height = " + this.height);
 
         var projection = d3.geoAlbersUsa()
-          .scale(1350)
-          .translate([1400 / 2, 650 / 2]);
+            .scale(1350)
+            .translate([1400 / 2, 650 / 2]);
 
         var path = d3.geoPath()
             .projection(projection);
@@ -70,15 +53,22 @@ export class DataMapComponent implements OnInit, OnChanges {
     }
 
     updateMap() {
-        //console.log("Updating map");
-        //console.log(this.mapData);
+        var i = 0;
+
         this.mapData.forEach((data) => {
+
+            if (i % 1000 == 0) {
+                console.log(data);
+            }
+
             d3.select("path#p" + data[0])
                 .transition()
                 .duration(500)
                 .attr('fill', function (d) {
                     return 'hsl(' + data[1] + ', 100%, 50%)';
                 });
+
+            i++;
         });
     }
 

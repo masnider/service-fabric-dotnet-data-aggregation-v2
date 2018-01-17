@@ -39,17 +39,11 @@ export class AppComponent implements OnInit {
 
     generateMapData() {
         this.mapData = [];
-        for (let i = 1001; i <= 56045; i++) {
 
-            var num = i.toString();
-
-            if (num.length == 4)
-            {
-                num.padStart(5, "0");
-            }
-            
-            this.mapData.push([i, Math.floor(Math.random() * 100)]);
-        }
+        this._httpService.get('/api/mapData').subscribe(values => {
+            this.mapData = values.json() as string[];
+            console.log(this.mapData);
+        })
     }
 
     refreshValues()

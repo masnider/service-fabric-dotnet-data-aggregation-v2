@@ -25,6 +25,35 @@ namespace WebService
       return new string[] { "value1" + r.Next(), "value2" + r.Next() };
     }
 
+    [HttpGet]
+    [Route("mapData")]
+    public List<string[]> GetMapData()
+    {
+      Random r = new Random();
+      List<string[]> mapData = new List<string[]>();
+
+      for (int i = 1001; i <= 56045; i++)
+      {
+
+        var num = i.ToString();
+
+        if (num.Length == 4)
+        {
+          num.PadLeft(5, '0');
+        }
+
+        mapData.Add(new string[] { i.ToString(), r.Next(0, 101).ToString() });
+      }
+
+      return mapData;
+    }
+
+    //[HttpGet("/chartData")]
+    //public string GetChartData()
+    //{
+
+    //}
+
     // GET api/values/5
     [HttpGet("{id}")]
     public string Get(int id)
