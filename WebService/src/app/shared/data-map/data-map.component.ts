@@ -41,7 +41,6 @@ export class DataMapComponent implements OnInit, OnChanges {
             .projection(projection);
 
         d3.json("us-10m.json", function (topology: any) {
-            console.log(topology.objects.counties);
             svg.selectAll(".region")
                 .data(topojson.feature(topology, topology.objects.counties).features)
                 .enter()
@@ -53,22 +52,13 @@ export class DataMapComponent implements OnInit, OnChanges {
     }
 
     updateMap() {
-        var i = 0;
-
         this.mapData.forEach((data) => {
-
-            if (i % 1000 == 0) {
-                console.log(data);
-            }
-
             d3.select("path#p" + data[0])
                 .transition()
-                .duration(500)
+                .duration(100)
                 .attr('fill', function (d) {
                     return 'hsl(' + data[1] + ', 100%, 50%)';
                 });
-
-            i++;
         });
     }
 
