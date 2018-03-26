@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.ResponseCompression;
 using System.IO;
 
-namespace WebService
+namespace DataAggregation.WebService
 {
   public class Startup
   {

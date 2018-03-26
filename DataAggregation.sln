@@ -1,13 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "DataAggregation", "DataAggregation\DataAggregation.sfproj", "{FF09C711-C0E8-4191-B639-779ED1DED513}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAggregation.WebService", "WebService\DataAggregation.WebService.csproj", "{E1B56872-B7BC-4C2C-B8FB-1D66767C405E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAggregation.Common", "DataAggregation.Common\DataAggregation.Common.csproj", "{B46F282A-8E1F-4690-973E-DE8C3B3199ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAggregation.DeviceCreationService", "DataAggregation.DeviceCreationService\DataAggregation.DeviceCreationService.csproj", "{E49AB550-E7DE-4A1F-BCEB-F9962AE530DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAggregation.DeviceActor.Interface", "DataAggregation.DeviceActor.Interface\DataAggregation.DeviceActor.Interface.csproj", "{B92C840F-CD6E-4124-BE42-48D593851CD7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +45,22 @@ Global
 		{B46F282A-8E1F-4690-973E-DE8C3B3199ED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B46F282A-8E1F-4690-973E-DE8C3B3199ED}.Release|x64.ActiveCfg = Release|Any CPU
 		{B46F282A-8E1F-4690-973E-DE8C3B3199ED}.Release|x64.Build.0 = Release|Any CPU
+		{E49AB550-E7DE-4A1F-BCEB-F9962AE530DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E49AB550-E7DE-4A1F-BCEB-F9962AE530DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E49AB550-E7DE-4A1F-BCEB-F9962AE530DB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E49AB550-E7DE-4A1F-BCEB-F9962AE530DB}.Debug|x64.Build.0 = Debug|Any CPU
+		{E49AB550-E7DE-4A1F-BCEB-F9962AE530DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E49AB550-E7DE-4A1F-BCEB-F9962AE530DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E49AB550-E7DE-4A1F-BCEB-F9962AE530DB}.Release|x64.ActiveCfg = Release|Any CPU
+		{E49AB550-E7DE-4A1F-BCEB-F9962AE530DB}.Release|x64.Build.0 = Release|Any CPU
+		{B92C840F-CD6E-4124-BE42-48D593851CD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B92C840F-CD6E-4124-BE42-48D593851CD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B92C840F-CD6E-4124-BE42-48D593851CD7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B92C840F-CD6E-4124-BE42-48D593851CD7}.Debug|x64.Build.0 = Debug|Any CPU
+		{B92C840F-CD6E-4124-BE42-48D593851CD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B92C840F-CD6E-4124-BE42-48D593851CD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B92C840F-CD6E-4124-BE42-48D593851CD7}.Release|x64.ActiveCfg = Release|Any CPU
+		{B92C840F-CD6E-4124-BE42-48D593851CD7}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

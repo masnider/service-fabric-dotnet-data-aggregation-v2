@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAggregation.Common
+namespace DataAggregation.Common.Types
 {
     //System.InvalidOperationException: No serializer defined for type: System.DateTimeOffset
     //Code to solve both issues from: https://stackoverflow.com/a/39090557/4852187 

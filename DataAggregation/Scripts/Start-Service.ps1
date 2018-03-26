@@ -15,17 +15,17 @@ $appInitialVersion = "1.0.0"
 if($singleNode)
 {
     $webServiceInstanceCount = -1
-    $bandCreationInstanceCount = -1
+    $deviceCreationInstanceCount = -1
     $countyServicePartitionCount = 1
-    $bandActorServicePartitionCount = 1
+    $deviceActorServicePartitionCount = 1
     $doctorServicePartitionCount = 1
 }
 else
 {
     $webServiceInstanceCount = @{$true=-1;$false=1}[$cloud -eq $true] 
-    $bandCreationInstanceCount = @{$true=-1;$false=1}[$cloud -eq $true] 
+    $deviceCreationInstanceCount = @{$true=-1;$false=1}[$cloud -eq $true] 
     $countyServicePartitionCount = @{$true=10;$false=5}[$cloud -eq $true]  
-    $bandActorServicePartitionCount = @{$true=15;$false=5}[$cloud -eq $true]  
+    $deviceActorServicePartitionCount = @{$true=15;$false=5}[$cloud -eq $true]  
     $doctorServicePartitionCount = @{$true=100;$false=5}[$cloud -eq $true]  
 
     if($constrainedNodeTypes)
@@ -33,18 +33,18 @@ else
         $webServiceConstraint = "NodeType == "
         $countyServiceConstraint = "NodeType == "
         $nationalServiceConstraint = "NodeType == "
-        $bandServiceConstraint = "NodeType == "
+        $deviceServiceConstraint = "NodeType == "
         $doctorServiceConstraint = "NodeType == "   
-        $bandCreationServiceConstraint = "NodeType == "        
+        $deviceCreationServiceConstraint = "NodeType == "        
     }
     else
     {
         $webServiceConstraint = ""
         $countyServiceConstraint = ""
         $nationalServiceConstraint = ""
-        $bandServiceConstraint = ""
+        $deviceServiceConstraint = ""
         $doctorServiceConstraint = ""
-        $bandCreationServiceConstraint = ""   
+        $deviceCreationServiceConstraint = ""   
     }
 }
 
@@ -59,16 +59,16 @@ $countyServiceType = "DataAggregation.CountyServiceType"
 $countyServiceName = "DataAggregation.CountyService"
 $countyServiceReplicaCount = @{$true=1;$false=3}[$singleNode -eq $true]  
 
-$bandCreationServiceType = "DataAggregation.BandCreationServiceType"
-$bandCreationServiceName = "DataAggregation.BandCreationService"
+$deviceCreationServiceType = "DataAggregation.DeviceCreationServiceType"
+$deviceCreationServiceName = "DataAggregation.DeviceCreationService"
 
 $doctorServiceType = "DataAggregation.DoctorServiceType"
 $doctorServiceName = "DataAggregation.DoctorService"
 $doctorServiceReplicaCount = @{$true=1;$false=3}[$singleNode -eq $true]
 
-$bandActorServiceType = "BandActorServiceType"
-$bandActorServiceName= "DataAggregation.BandActorService"
-$bandActorReplicaCount = @{$true=1;$false=3}[$singleNode -eq $true]
+$deviceActorServiceType = "DeviceActorServiceType"
+$deviceActorServiceName= "DataAggregation.DeviceActorService"
+$deviceActorReplicaCount = @{$true=1;$false=3}[$singleNode -eq $true]
 
 New-ServiceFabricService -ServiceTypeName $webServiceType -Stateless -ApplicationName $appName -ServiceName "$appName/$webServiceName" -PartitionSchemeSingleton -InstanceCount $webServiceInstanceCount -PlacementConstraint $webServiceConstraint -ServicePackageActivationMode ExclusiveProcess
 
@@ -81,8 +81,8 @@ New-ServiceFabricService -ServiceTypeName $webServiceType -Stateless -Applicatio
 #create doctor
 #New-ServiceFabricService -ServiceTypeName $doctorServiceType -Stateful -HasPersistedState -ApplicationName $appName -ServiceName "$appName/$doctorServiceName" -PartitionSchemeUniformInt64 -LowKey $lowkey -HighKey $highkey -PartitionCount $doctorServicePartitionCount -MinReplicaSetSize $doctorServiceReplicaCount -TargetReplicaSetSize $doctorServiceReplicaCount -PlacementConstraint $doctorServiceConstraint -ServicePackageActivationMode ExclusiveProcess
 
-#create band
-#New-ServiceFabricService -ServiceTypeName $bandActorServiceType -Stateful -ApplicationName $appName -ServiceName "$appName/$bandActorServiceName" -PartitionSchemeUniformInt64 -LowKey $lowkey -HighKey $highkey -PartitionCount $bandActorServicePartitionCount -MinReplicaSetSize $bandActorReplicaCount -TargetReplicaSetSize $bandActorReplicaCount -PlacementConstraint $bandServiceConstraint -ServicePackageActivationMode ExclusiveProcess
+#create device
+#New-ServiceFabricService -ServiceTypeName $deviceActorServiceType -Stateful -ApplicationName $appName -ServiceName "$appName/$deviceActorServiceName" -PartitionSchemeUniformInt64 -LowKey $lowkey -HighKey $highkey -PartitionCount $deviceActorServicePartitionCount -MinReplicaSetSize $deviceActorReplicaCount -TargetReplicaSetSize $deviceActorReplicaCount -PlacementConstraint $deviceServiceConstraint -ServicePackageActivationMode ExclusiveProcess
 
-#create band creation
-#New-ServiceFabricService -ServiceTypeName $bandCreationServiceType -Stateless -ApplicationName $appName -ServiceName "$appName/$bandCreationServiceName" -PartitionSchemeSingleton -InstanceCount $bandCreationInstanceCount -PlacementConstraint $bandCreationServiceConstraint -ServicePackageActivationMode ExclusiveProcess
+#create device creation
+New-ServiceFabricService -ServiceTypeName $deviceCreationServiceType -Stateless -ApplicationName $appName -ServiceName "$appName/$deviceCreationServiceName" -PartitionSchemeSingleton -InstanceCount $deviceCreationInstanceCount -PlacementConstraint $deviceCreationServiceConstraint -ServicePackageActivationMode ExclusiveProcess

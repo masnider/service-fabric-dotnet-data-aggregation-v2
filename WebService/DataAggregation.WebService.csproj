@@ -5,6 +5,7 @@
     <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
     <IsServiceFabricServiceProject>True</IsServiceFabricServiceProject>
     <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
+    <RootNamespace>DataAggregation.WebService</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

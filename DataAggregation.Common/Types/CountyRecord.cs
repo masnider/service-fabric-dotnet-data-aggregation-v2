@@ -3,14 +3,14 @@
 //  Licensed under the MIT License (MIT). See License.txt in the repo root for license information.
 // ------------------------------------------------------------
 
-namespace DataAggregation.Common
+namespace DataAggregation.Common.Types
 {
     using DataAggregation.Common.ServiceUtilities;
     using ProtoBuf;
     using System.Runtime.Serialization;
 
     [DataContract]
-    [ProtoContract]
+    [ProtoBuf.ProtoContract]
     public struct CountyRecord
     {
         [DataMember]

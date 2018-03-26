@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Services.Runtime;
 
-namespace WebService
+namespace DataAggregation.WebService
 {
     [EventSource(Name = "MyCompany-DataAggregation-WebService")]
     internal sealed class ServiceEventSource : EventSource

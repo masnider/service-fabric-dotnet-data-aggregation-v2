@@ -7,7 +7,7 @@ using System.Fabric.Description;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 
-namespace WebService
+namespace DataAggregation.WebService
 {
   [Route("api")]
   public class DefaultApiController : Controller

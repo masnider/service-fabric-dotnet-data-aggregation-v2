@@ -20,7 +20,7 @@ export class LineChartComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.createChart();
-    setInterval(() => this.updateChart(), 3000);
+    setInterval(() => this.updateChart(), 1000);
   }
 
   ngOnChanges() { }
