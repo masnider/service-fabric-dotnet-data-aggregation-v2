@@ -11,7 +11,6 @@
   <ItemGroup>
     <Folder Include="HttpCommunicationUtilities\" />
     <Folder Include="JsonStuff\" />
-    <Folder Include="Types\" />
     <Folder Include="ProtoStuff\" />
   </ItemGroup>
 

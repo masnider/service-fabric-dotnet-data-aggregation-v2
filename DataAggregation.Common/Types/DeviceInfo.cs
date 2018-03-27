@@ -51,7 +51,7 @@ namespace DataAggregation.Common.Types
 
         public override int GetHashCode()
         {
-            return HashUtil.getIntHashCode(this.ToString());
+            return HashUtil.getIntHashCode(this.ToString());  //TODO - Scrub all custom types for consistent hash implementation
         }
     }
 }

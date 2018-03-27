@@ -9,7 +9,7 @@
     {
         Task NewAsync(DeviceInfo info);
 
-        Task<BandDataViewModel> GetBandDataAsync();
+        Task<DeviceDataViewModel> GetDeviceDataAsync();
 
     }
 }

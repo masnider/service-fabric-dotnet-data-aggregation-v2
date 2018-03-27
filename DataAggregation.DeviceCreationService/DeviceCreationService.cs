@@ -34,7 +34,7 @@ namespace DataAggregation.DeviceCreationService
         private Uri ActorServiceUri;
         private Uri DoctorServiceUri;
         private int NumberOfCreationThreads;
-        private int MaxBandsToCreatePerServiceInstance;
+        private int MaxDevicesToCreatePerService;
 
         private ConcurrentDictionary<int, ServicePartitionClient<HttpCommunicationClient>> communicationClientDictionary =
             new ConcurrentDictionary<int, ServicePartitionClient<HttpCommunicationClient>>();
@@ -49,7 +49,7 @@ namespace DataAggregation.DeviceCreationService
             KeyedCollection<string, ConfigurationProperty> serviceParameters = configSettings.Sections["HealthMetrics.DeviceCreationService.Settings"].Parameters;
 
             this.NumberOfCreationThreads = int.Parse(serviceParameters["NumberOfCreationThreads"].Value);
-            this.MaxBandsToCreatePerServiceInstance = int.Parse(serviceParameters["MaxDevicesToCreatePerServiceInstance"].Value);
+            this.MaxDevicesToCreatePerService = int.Parse(serviceParameters["MaxDevicesToCreatePerServiceInstance"].Value);
             this.ActorServiceUri = new ServiceUriBuilder(serviceParameters["DeviceActorServiceName"].Value).ToUri();
             this.DoctorServiceUri = new ServiceUriBuilder(serviceParameters["DoctorServiceInstanceName"].Value).ToUri();
 
@@ -62,7 +62,7 @@ namespace DataAggregation.DeviceCreationService
 
             for (int i = 0; i < this.NumberOfCreationThreads; i++)
             {
-                tasks.Add(Task.Run(() => this.CreateBandActorTask(bag, cancellationToken), cancellationToken));
+                tasks.Add(Task.Run(() => this.CreateDeviceActorAsync(bag, cancellationToken), cancellationToken));
             }
 
             ServiceEventSource.Current.ServiceMessage(this.Context, "Device Creation has begun.");
@@ -70,12 +70,12 @@ namespace DataAggregation.DeviceCreationService
             ServiceEventSource.Current.ServiceMessage(this.Context, "Device Creation has completed.");
         }
 
-        private async Task CreateBandActorTask(DeviceActorGenerator bag, CancellationToken cancellationToken)
+        private async Task CreateDeviceActorAsync(DeviceActorGenerator bag, CancellationToken cancellationToken)
         {
             //TODO: Should be able to replace this with a normal Random
             CryptoRandom random = new CryptoRandom();
 
-            while (!cancellationToken.IsCancellationRequested && this.MaxBandsToCreatePerServiceInstance > 0)
+            while (!cancellationToken.IsCancellationRequested && this.MaxDevicesToCreatePerService > 0)
             {
                 bool created = false;
                 while (!created && !cancellationToken.IsCancellationRequested)
@@ -100,15 +100,15 @@ namespace DataAggregation.DeviceCreationService
                         var dcr = new DoctorCreationRecord(doctorName, doctorId, randomCountyRecord);
                         ServicePartitionKey key = new ServicePartitionKey(HashUtil.getLongHashCode(bandActorInfo.DoctorId.ToString()));
 
-                        await FabricHttpClient.MakePostRequest<string, DoctorCreationRecord>(
-                            this.DoctorServiceUri,
-                            key,
-                            "ServiceEndpoint",
-                            "/doctor/new/" + doctorId,
-                            dcr,
-                            SerializationSelector.PBUF,
-                            cancellationToken
-                            );
+                        //await FabricHttpClient.MakePostRequest<string, DoctorCreationRecord>(
+                        //    this.DoctorServiceUri,
+                        //    key,
+                        //    "ServiceEndpoint",
+                        //    "/doctor/new/" + doctorId,
+                        //    dcr,
+                        //    SerializationSelector.PBUF,
+                        //    cancellationToken
+                        //    );
 
                         IDeviceActor bandActor = ActorProxy.Create<IDeviceActor>(bandActorId, ActorServiceUri);
                         await bandActor.NewAsync(bandActorInfo);
@@ -124,9 +124,9 @@ namespace DataAggregation.DeviceCreationService
                     }
                 }
 
-                this.MaxBandsToCreatePerServiceInstance--;
+                this.MaxDevicesToCreatePerService--;
 
-                ServiceEventSource.Current.ServiceMessage(this.Context, "Created Actors, {0} remaining", this.MaxBandsToCreatePerServiceInstance);
+                ServiceEventSource.Current.ServiceMessage(this.Context, "Created Actors, {0} remaining", this.MaxDevicesToCreatePerService);
 
                 await Task.Delay(100, cancellationToken);
             }

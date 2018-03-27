@@ -7,11 +7,13 @@ Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "DataAggregation", "DataAggr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAggregation.WebService", "WebService\DataAggregation.WebService.csproj", "{E1B56872-B7BC-4C2C-B8FB-1D66767C405E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAggregation.Common", "DataAggregation.Common\DataAggregation.Common.csproj", "{B46F282A-8E1F-4690-973E-DE8C3B3199ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAggregation.Common", "DataAggregation.Common\DataAggregation.Common.csproj", "{B46F282A-8E1F-4690-973E-DE8C3B3199ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAggregation.DeviceCreationService", "DataAggregation.DeviceCreationService\DataAggregation.DeviceCreationService.csproj", "{E49AB550-E7DE-4A1F-BCEB-F9962AE530DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAggregation.DeviceCreationService", "DataAggregation.DeviceCreationService\DataAggregation.DeviceCreationService.csproj", "{E49AB550-E7DE-4A1F-BCEB-F9962AE530DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAggregation.DeviceActor.Interface", "DataAggregation.DeviceActor.Interface\DataAggregation.DeviceActor.Interface.csproj", "{B92C840F-CD6E-4124-BE42-48D593851CD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAggregation.DeviceActor.Interface", "DataAggregation.DeviceActor.Interface\DataAggregation.DeviceActor.Interface.csproj", "{B92C840F-CD6E-4124-BE42-48D593851CD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAggregation.DeviceActor", "DataAggregation.DeviceActor\DataAggregation.DeviceActor.csproj", "{C9E63FFA-DB62-4B29-AAD4-170C9C154549}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,14 @@ Global
 		{B92C840F-CD6E-4124-BE42-48D593851CD7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B92C840F-CD6E-4124-BE42-48D593851CD7}.Release|x64.ActiveCfg = Release|Any CPU
 		{B92C840F-CD6E-4124-BE42-48D593851CD7}.Release|x64.Build.0 = Release|Any CPU
+		{C9E63FFA-DB62-4B29-AAD4-170C9C154549}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9E63FFA-DB62-4B29-AAD4-170C9C154549}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9E63FFA-DB62-4B29-AAD4-170C9C154549}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C9E63FFA-DB62-4B29-AAD4-170C9C154549}.Debug|x64.Build.0 = Debug|Any CPU
+		{C9E63FFA-DB62-4B29-AAD4-170C9C154549}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9E63FFA-DB62-4B29-AAD4-170C9C154549}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9E63FFA-DB62-4B29-AAD4-170C9C154549}.Release|x64.ActiveCfg = Release|Any CPU
+		{C9E63FFA-DB62-4B29-AAD4-170C9C154549}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

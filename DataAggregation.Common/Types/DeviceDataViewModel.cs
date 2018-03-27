@@ -5,25 +5,25 @@
 
 namespace DataAggregation.Common.Types
 {
-    using global::ProtoBuf;
+    using global::ProtoBuf; //TODO - Why?
     using System;
     using System.Collections.Generic;
     using System.Runtime.Serialization;
 
     [DataContract]
     [ProtoContract]
-    public struct BandDataViewModel
+    public struct DeviceDataViewModel
     {
-        public BandDataViewModel(
+        public DeviceDataViewModel(
             Guid doctorId,
-            Guid bandId,
+            Guid deviceId,
             string patientName,
             CountyRecord countyInfo,
             HealthIndex healthIndexValue,
             IEnumerable<HeartRateRecord> heartRateHistory)
         {
             this.DoctorId = doctorId;
-            this.PersonId = bandId;
+            this.PersonId = deviceId;
             this.PersonName = patientName; //used
             this.CountyInfo = countyInfo; //used
             this.HealthIndexValue = healthIndexValue; //used
