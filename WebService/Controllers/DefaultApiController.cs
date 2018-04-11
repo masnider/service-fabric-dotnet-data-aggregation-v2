@@ -1,11 +1,9 @@
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using System.Fabric;
-using System.Fabric.Description;
 using System.Collections.ObjectModel;
-using Newtonsoft.Json;
+using System.Fabric.Description;
 
 namespace DataAggregation.WebService
 {

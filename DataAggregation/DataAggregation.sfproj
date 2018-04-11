@@ -32,6 +32,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DataAggregation.DeviceActor\DataAggregation.DeviceActor.csproj" />
     <ProjectReference Include="..\DataAggregation.DeviceCreationService\DataAggregation.DeviceCreationService.csproj" />
+    <ProjectReference Include="..\DataAggregation.DoctorService\DataAggregation.DoctorService.csproj" />
     <ProjectReference Include="..\WebService\DataAggregation.WebService.csproj" />
   </ItemGroup>
   <ItemGroup>

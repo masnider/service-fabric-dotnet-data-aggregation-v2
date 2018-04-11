@@ -65,7 +65,7 @@ namespace DataAggregation.Common.Types
 
         public int CompareTo(object obj)
         {
-            return this.CompareTo((HealthIndex) obj);
+            return this.CompareTo((HealthIndex)obj);
         }
 
         public bool Equals(HealthIndex other)
@@ -77,7 +77,7 @@ namespace DataAggregation.Common.Types
         {
             if (obj is HealthIndex)
             {
-                return this.Equals((HealthIndex) obj);
+                return this.Equals((HealthIndex)obj);
             }
 
             return false;

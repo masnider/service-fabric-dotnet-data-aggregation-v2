@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Dynamic;
 using System.Fabric;
 using System.Fabric.Description;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAggregation.Common.ServiceUtilities
 {

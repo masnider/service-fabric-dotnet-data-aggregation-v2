@@ -3,7 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 
-namespace DataAggregation.DeviceCreationService
+namespace DataAggregation.DoctorService
 {
     internal static class Program
     {
@@ -19,12 +19,12 @@ namespace DataAggregation.DeviceCreationService
                 // When Service Fabric creates an instance of this service type,
                 // an instance of the class is created in this host process.
 
-                ServiceRuntime.RegisterServiceAsync("DataAggregation.DeviceCreationServiceType",
-                    context => new DeviceCreationService(context)).GetAwaiter().GetResult();
+                ServiceRuntime.RegisterServiceAsync("DataAggregation.DoctorServiceType",
+                    context => new DoctorService(context)).GetAwaiter().GetResult();
 
-                ServiceEventSource.Current.ServiceTypeRegistered(Process.GetCurrentProcess().Id, typeof(DeviceCreationService).Name);
+                ServiceEventSource.Current.ServiceTypeRegistered(Process.GetCurrentProcess().Id, typeof(DoctorService).Name);
 
-                // Prevents this host process from terminating so services keep running.
+                // Prevents this host process from terminating so services keeps running. 
                 Thread.Sleep(Timeout.Infinite);
             }
             catch (Exception e)

@@ -1,23 +1,23 @@
 ﻿namespace DataAggregation.DeviceActor
 {
 
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
+    using DataAggregation.Common;
+    using DataAggregation.Common.ServiceUtilities;
+    using DataAggregation.Common.Types;
+    using DataAggregation.DeviceCreationService;
     using Microsoft.ServiceFabric.Actors;
     using Microsoft.ServiceFabric.Actors.Runtime;
-    using DataAggregation.DeviceCreationService;
-    using DataAggregation.Common.ServiceUtilities;
-    using DataAggregation.Common;
-    using Microsoft.ServiceFabric.Services.Client;
-    using DataAggregation.Common.Types;
     using Microsoft.ServiceFabric.Data;
-    using System.Net.Http;
+    using Microsoft.ServiceFabric.Services.Client;
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Fabric;
     using System.Fabric.Description;
-    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <remarks>
     /// This class represents an actor.
@@ -145,7 +145,7 @@
         protected override Task OnActivateAsync()
         {
             ConfigurationPackage configPackage = this.ActorService.Context.CodePackageActivationContext.GetConfigurationPackageObject("Config");
-            
+
 
             this.indexCalculator = new HealthIndexCalculator(this.ActorService.Context);
             this.UpdateConfigSettings(configPackage.Settings);
@@ -222,6 +222,6 @@
         {
             this.registrationReminder = await this.RegisterReminderAsync(RegisterPatientReminderName, null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(0));
         }
-        
+
     }
 }

@@ -5,9 +5,9 @@
 
 namespace DataAggregation.Common.Types
 {
+    using DataAggregation.Common.ServiceUtilities;
     using System;
     using System.Runtime.Serialization;
-    using DataAggregation.Common.ServiceUtilities;
 
     [DataContract]
     public struct DeviceInfo
@@ -46,7 +46,7 @@ namespace DataAggregation.Common.Types
 
         public override bool Equals(object obj)
         {
-            return (this == (DeviceInfo) obj);
+            return (this == (DeviceInfo)obj);
         }
 
         public override int GetHashCode()

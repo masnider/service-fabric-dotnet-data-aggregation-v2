@@ -1,9 +1,7 @@
 using Microsoft.ServiceFabric.Services.Runtime;
 using System;
 using System.Diagnostics;
-using System.Fabric;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace DataAggregation.WebService
 {
@@ -14,7 +12,7 @@ namespace DataAggregation.WebService
     /// </summary>
     private static void Main()
     {
-      
+
       try
       {
         // The ServiceManifest.XML file defines one or more service type names.

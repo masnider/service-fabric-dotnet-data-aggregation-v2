@@ -1,14 +1,12 @@
 ﻿namespace DataAggregation.Common.ProtoStuff
 {
+    using ProtoBuf;
     using System;
-    using System.Collections.Generic;
     using System.IO;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
-    using System.Text;
     using System.Threading.Tasks;
-    using ProtoBuf;
 
     public class ProtoContent : HttpContent
     {
@@ -29,7 +27,7 @@
                 // Otherwise - https://github.com/svn2github/protobuf-net/blob/master/protobuf-net/ProtoReader.cs#L1320
                 data = ms.GetBuffer();
                 size = ms.Length;
-               
+
             }
             catch (Exception e)
             {

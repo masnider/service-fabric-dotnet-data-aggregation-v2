@@ -1,13 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.ResponseCompression;
-using System.IO;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DataAggregation.WebService
 {
@@ -29,10 +23,10 @@ namespace DataAggregation.WebService
           )
           .AddMvc(options =>
           {
-                  //options.InputFormatters.Add(new ProtobufInputFormatter());
-                  //options.OutputFormatters.Add(new ProtobufOutputFormatter());
-                  //options.FormatterMappings.SetMediaTypeMappingForFormat("protobuf", "application/x-protobuf");
-                }
+            //options.InputFormatters.Add(new ProtobufInputFormatter());
+            //options.OutputFormatters.Add(new ProtobufOutputFormatter());
+            //options.FormatterMappings.SetMediaTypeMappingForFormat("protobuf", "application/x-protobuf");
+          }
           );
 
     }

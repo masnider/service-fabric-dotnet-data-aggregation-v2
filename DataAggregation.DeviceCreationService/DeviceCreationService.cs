@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Fabric;
-using System.Fabric.Description;
-using System.Linq;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using DataAggregation.Common;
+﻿using DataAggregation.Common;
 using DataAggregation.Common.Http;
 using DataAggregation.Common.ServiceUtilities;
 using DataAggregation.Common.Types;
@@ -17,13 +7,22 @@ using Microsoft.ServiceFabric.Actors.Client;
 using Microsoft.ServiceFabric.Services.Client;
 using Microsoft.ServiceFabric.Services.Communication.Client;
 using Microsoft.ServiceFabric.Services.Runtime;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Fabric;
+using System.Fabric.Description;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace DataAggregation.DeviceCreationService
 {
     /// <summary>
     /// An instance of this class is created for each service instance by the Service Fabric runtime.
     /// </summary>
-    public class DeviceCreationService: StatelessService
+    public class DeviceCreationService : StatelessService
     {
         // This is the name of the ServiceType that is registered with FabricRuntime. 
         // This name must match the name defined in the ServiceManifest. If you change

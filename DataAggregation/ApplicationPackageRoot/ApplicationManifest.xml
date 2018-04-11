@@ -8,10 +8,22 @@
     <Parameter Name="DoctorServiceInstanceName" DefaultValue="DataAggregation.DoctorService" />
     <Parameter Name="CountyServiceInstanceName" DefaultValue="DataAggregation.CountyService" />
     <Parameter Name="NationalServiceInstanceName" DefaultValue="DataAggregation.NationalService" />
-    <Parameter Name="DeviceActorService_PartitionCount" DefaultValue="10" />
-    <Parameter Name="DeviceActorService_MinReplicaSetSize" DefaultValue="1" />
-    <Parameter Name="DeviceActorService_TargetReplicaSetSize" DefaultValue="1" />
   </Parameters>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="DataAggregation.DoctorServicePkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides>
+      <ConfigOverride Name="Config">
+        <Settings>
+          <Section Name="HealthIndexCalculator.Settings">
+            <Parameter Name="ScoreCalculationMode" Value="[ScoreCalculationMode]" />
+          </Section>
+          <Section Name="DataAggregation.DoctorService.Settings">
+            <Parameter Name="CountyServiceInstanceName" Value="[CountyServiceInstanceName]" />
+          </Section>
+        </Settings>
+      </ConfigOverride>
+    </ConfigOverrides>
+  </ServiceManifestImport>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="DataAggregation.DeviceActorPkg" ServiceManifestVersion="1.0.0" />
     <ConfigOverrides>

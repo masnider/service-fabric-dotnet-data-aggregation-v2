@@ -5,11 +5,11 @@
 
 namespace DataAggregation.Common.Http
 {
+    using Microsoft.ServiceFabric.Services.Client;
+    using Microsoft.ServiceFabric.Services.Communication.Client;
     using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.ServiceFabric.Services.Client;
-    using Microsoft.ServiceFabric.Services.Communication.Client;
 
     /// <summary>
     /// Factory that creates clients that know to communicate with the a service.

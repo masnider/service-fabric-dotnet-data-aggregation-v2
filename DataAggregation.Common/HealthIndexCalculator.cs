@@ -46,7 +46,7 @@ namespace DataAggregation.Common
 
         public HealthIndex ComputeAverageIndex(IEnumerable<HealthIndex> indices)
         {
-            return this.ComputeIndex((int) Math.Round(indices.Average(x => x.GetValue()), 0));
+            return this.ComputeIndex((int)Math.Round(indices.Average(x => x.GetValue()), 0));
         }
 
         private void UpdateConfigSettings(ConfigurationSettings configSettings)

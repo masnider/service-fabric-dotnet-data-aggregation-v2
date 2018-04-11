@@ -21,7 +21,7 @@ namespace DataAggregation.Common.ServiceUtilities
 
         public static int getIntHashCode(string stringInput)
         {
-            return (int) getLongHashCode(stringInput);
+            return (int)getLongHashCode(stringInput);
         }
     }
 }

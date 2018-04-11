@@ -3,7 +3,7 @@ using ProtoBuf;
 using ProtoBuf.Meta;
 using System.IO;
 
-namespace DataAggregation.Common.Types
+namespace DataAggregation.DoctorService.Models
 {
     class DoctorCreationRecordSerializer : IStateSerializer<DoctorCreationRecord>
     {

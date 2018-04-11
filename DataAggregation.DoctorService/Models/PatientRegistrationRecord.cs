@@ -1,7 +1,8 @@
-﻿using ProtoBuf;
+﻿using DataAggregation.Common.Types;
+using ProtoBuf;
 using System;
 
-namespace DataAggregation.Common.Types
+namespace DataAggregation.DoctorService.Models
 {
     [ProtoContract]
     public struct PatientRegistrationRecord
