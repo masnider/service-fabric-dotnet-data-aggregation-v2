@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAggregation.DeviceActor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAggregation.DeviceActor", "DataAggregation.DeviceActor\DataAggregation.DeviceActor.csproj", "{C9E63FFA-DB62-4B29-AAD4-170C9C154549}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAggregation.DoctorService", "DataAggregation.DoctorService\DataAggregation.DoctorService.csproj", "{9CA8657C-0039-49E6-AB8A-14F2FF5A3FB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAggregation.DoctorService", "DataAggregation.DoctorService\DataAggregation.DoctorService.csproj", "{9CA8657C-0039-49E6-AB8A-14F2FF5A3FB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAggregation.CountyService", "DataAggregation.CountyService\DataAggregation.CountyService.csproj", "{7F0C1B1F-5854-4850-8146-1F591D85484E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,14 @@ Global
 		{9CA8657C-0039-49E6-AB8A-14F2FF5A3FB6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9CA8657C-0039-49E6-AB8A-14F2FF5A3FB6}.Release|x64.ActiveCfg = Release|Any CPU
 		{9CA8657C-0039-49E6-AB8A-14F2FF5A3FB6}.Release|x64.Build.0 = Release|Any CPU
+		{7F0C1B1F-5854-4850-8146-1F591D85484E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F0C1B1F-5854-4850-8146-1F591D85484E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F0C1B1F-5854-4850-8146-1F591D85484E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7F0C1B1F-5854-4850-8146-1F591D85484E}.Debug|x64.Build.0 = Debug|Any CPU
+		{7F0C1B1F-5854-4850-8146-1F591D85484E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F0C1B1F-5854-4850-8146-1F591D85484E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F0C1B1F-5854-4850-8146-1F591D85484E}.Release|x64.ActiveCfg = Release|Any CPU
+		{7F0C1B1F-5854-4850-8146-1F591D85484E}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

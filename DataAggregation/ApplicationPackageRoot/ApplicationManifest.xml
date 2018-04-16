@@ -10,6 +10,21 @@
     <Parameter Name="NationalServiceInstanceName" DefaultValue="DataAggregation.NationalService" />
   </Parameters>
   <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="DataAggregation.CountyServicePkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides>
+      <ConfigOverride Name="Config">
+        <Settings>
+          <Section Name="HealthIndexCalculator.Settings">
+            <Parameter Name="ScoreCalculationMode" Value="[ScoreCalculationMode]" />
+          </Section>
+          <Section Name="DataAggregation.CountyService.Settings">
+            <Parameter Name="NationalServiceInstanceName" Value="[NationalServiceInstanceName]" />
+          </Section>
+        </Settings>
+      </ConfigOverride>
+    </ConfigOverrides>
+  </ServiceManifestImport>
+  <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="DataAggregation.DoctorServicePkg" ServiceManifestVersion="1.0.0" />
     <ConfigOverrides>
       <ConfigOverride Name="Config">

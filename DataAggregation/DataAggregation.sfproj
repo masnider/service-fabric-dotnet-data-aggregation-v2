@@ -30,6 +30,7 @@
     <None Include="Scripts\Start-Service.ps1" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataAggregation.CountyService\DataAggregation.CountyService.csproj" />
     <ProjectReference Include="..\DataAggregation.DeviceActor\DataAggregation.DeviceActor.csproj" />
     <ProjectReference Include="..\DataAggregation.DeviceCreationService\DataAggregation.DeviceCreationService.csproj" />
     <ProjectReference Include="..\DataAggregation.DoctorService\DataAggregation.DoctorService.csproj" />

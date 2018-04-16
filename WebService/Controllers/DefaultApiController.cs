@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Fabric;
 using System.Fabric.Description;
 
 namespace DataAggregation.WebService
@@ -13,7 +14,7 @@ namespace DataAggregation.WebService
     private readonly KeyedCollection<string, ConfigurationProperty> configPackageSettings;
     public DefaultApiController()
     {
-      //this.configPackageSettings = FabricRuntime.GetActivationContext().GetConfigurationPackageObject("Config").Settings.Sections["HealthMetrics.WebService.Settings"].Parameters;
+      this.configPackageSettings = FabricRuntime.GetActivationContext().GetConfigurationPackageObject("Config").Settings.Sections["DataAggregation.WebService.Settings"].Parameters;
     }
 
     // GET: api
