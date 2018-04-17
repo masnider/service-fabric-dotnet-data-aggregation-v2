@@ -27,7 +27,7 @@ namespace DataAggregation.DeviceCreationService
 
         public DeviceActorGenerator(ConfigurationSettings settings, string dataPath)
         {
-            KeyedCollection<string, ConfigurationProperty> serviceParameters = settings.Sections["HealthMetrics.DeviceCreationService.Settings"].Parameters;
+            KeyedCollection<string, ConfigurationProperty> serviceParameters = settings.Sections["DataAggregation.DeviceCreationService.Settings"].Parameters;
 
             this.pathToCountyFile = Path.Combine(dataPath, serviceParameters["CountyFileName"].Value);
             this.pathToNamesFile = Path.Combine(dataPath, serviceParameters["PeopleFileName"].Value);

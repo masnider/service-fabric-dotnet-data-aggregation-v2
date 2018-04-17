@@ -14,6 +14,7 @@ using System.Collections.ObjectModel;
 using System.Fabric;
 using System.Fabric.Description;
 using System.Linq;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -27,7 +28,7 @@ namespace DataAggregation.DeviceCreationService
         // This is the name of the ServiceType that is registered with FabricRuntime. 
         // This name must match the name defined in the ServiceManifest. If you change
         // this name, please change the name of the ServiceType in the ServiceManifest.
-        public const string ServiceTypeName = "HealthMetrics.DeviceCreationServiceType";
+        public const string ServiceTypeName = "DataAggregation.DeviceCreationServiceType";
 
         private static FabricClient fabricClient = new FabricClient();
         private Uri ActorServiceUri;
@@ -45,7 +46,7 @@ namespace DataAggregation.DeviceCreationService
         protected override async Task RunAsync(CancellationToken cancellationToken)
         {
             ConfigurationSettings configSettings = FabricRuntime.GetActivationContext().GetConfigurationPackageObject("Config").Settings;
-            KeyedCollection<string, ConfigurationProperty> serviceParameters = configSettings.Sections["HealthMetrics.DeviceCreationService.Settings"].Parameters;
+            KeyedCollection<string, ConfigurationProperty> serviceParameters = configSettings.Sections["DataAggregation.DeviceCreationService.Settings"].Parameters;
 
             this.NumberOfCreationThreads = int.Parse(serviceParameters["NumberOfCreationThreads"].Value);
             this.MaxDevicesToCreatePerService = int.Parse(serviceParameters["MaxDevicesToCreatePerServiceInstance"].Value);
@@ -99,15 +100,15 @@ namespace DataAggregation.DeviceCreationService
                         var dcr = new DoctorCreationRecord(doctorName, doctorId, randomCountyRecord);
                         ServicePartitionKey key = new ServicePartitionKey(HashUtil.getLongHashCode(bandActorInfo.DoctorId.ToString()));
 
-                        //await FabricHttpClient.MakePostRequest<string, DoctorCreationRecord>(
-                        //    this.DoctorServiceUri,
-                        //    key,
-                        //    "ServiceEndpoint",
-                        //    "/doctor/new/" + doctorId,
-                        //    dcr,
-                        //    SerializationSelector.PBUF,
-                        //    cancellationToken
-                        //    );
+                        await FabricHttpClient.MakePostRequest<string, DoctorCreationRecord>(
+                            this.DoctorServiceUri,
+                            key,
+                            "ServiceEndpoint",
+                            "/doctor/new/" + doctorId,
+                            dcr,
+                            SerializationSelector.PBUF,
+                            cancellationToken
+                            );
 
                         IDeviceActor bandActor = ActorProxy.Create<IDeviceActor>(bandActorId, ActorServiceUri);
                         await bandActor.NewAsync(bandActorInfo);

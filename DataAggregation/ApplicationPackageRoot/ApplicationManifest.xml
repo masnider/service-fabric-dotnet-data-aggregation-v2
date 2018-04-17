@@ -59,7 +59,7 @@
     <ConfigOverrides>
       <ConfigOverride Name="Config">
         <Settings>
-          <Section Name="HealthMetrics.DeviceCreationService.Settings">
+          <Section Name="DataAggregation.DeviceCreationService.Settings">
             <Parameter Name="NumberOfCreationThreads" Value="[CreationServiceParallelThreads]" />
             <Parameter Name="MaxDevicesToCreatePerServiceInstance" Value="[MaxDevicesToCreatePerServiceInstance]" />
             <Parameter Name="DeviceActorServiceName" Value="[DeviceActorServiceName]" />
@@ -74,7 +74,7 @@
     <ConfigOverrides>
       <ConfigOverride Name="Config">
         <Settings>
-          <Section Name="HealthMetrics.WebService.Settings">
+          <Section Name="DataAggregation.WebService.Settings">
             <Parameter Name="DeviceActorServiceName" Value="[DeviceActorServiceName]" />
             <Parameter Name="CountyServiceInstanceName" Value="[CountyServiceInstanceName]" />
             <Parameter Name="NationalServiceInstanceName" Value="[NationalServiceInstanceName]" />
