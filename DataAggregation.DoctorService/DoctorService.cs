@@ -27,7 +27,8 @@
             return new ServiceReplicaListener[]
             {
                 new ServiceReplicaListener(serviceContext =>
-                    new KestrelCommunicationListener(serviceContext, (url, listener) =>
+                {
+                    return new KestrelCommunicationListener(serviceContext, (url, listener) =>
                     {
                         ServiceEventSource.Current.ServiceMessage(serviceContext, $"Starting Kestrel on {url}");
 
@@ -42,8 +43,10 @@
                                     .UseServiceFabricIntegration(listener, ServiceFabricIntegrationOptions.UseUniqueServiceUrl)
                                     .UseUrls(url)
                                     .Build();
-                    }))
-            };
+                    }
+                    );
+                }, "DoctorEndpoint")};
+
         }
     }
 }

@@ -103,7 +103,7 @@ namespace DataAggregation.DeviceCreationService
                         await FabricHttpClient.MakePostRequest<string, DoctorCreationRecord>(
                             this.DoctorServiceUri,
                             key,
-                            "ServiceEndpoint",
+                            "DoctorEndpoint",
                             "/doctor/new/" + doctorId,
                             dcr,
                             SerializationSelector.PBUF,
