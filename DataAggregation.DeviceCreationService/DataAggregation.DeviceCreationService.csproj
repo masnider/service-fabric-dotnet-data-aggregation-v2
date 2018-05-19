@@ -8,10 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.ServiceFabric" Version="6.2.269" />
-    <PackageReference Include="Microsoft.ServiceFabric.Actors" Version="3.1.269" />
-    <PackageReference Include="Microsoft.ServiceFabric.Data" Version="3.1.269" />
-    <PackageReference Include="Microsoft.ServiceFabric.Services" Version="3.1.269" />
+    <PackageReference Include="Microsoft.ServiceFabric" Version="6.2.274" />
+    <PackageReference Include="Microsoft.ServiceFabric.Actors" Version="3.1.274" />
+    <PackageReference Include="Microsoft.ServiceFabric.Data" Version="3.1.274" />
+    <PackageReference Include="Microsoft.ServiceFabric.Services" Version="3.1.274" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DataAggregation.Common\DataAggregation.Common.csproj" />
     <ProjectReference Include="..\DataAggregation.DeviceActor.Interface\DataAggregation.DeviceActor.Interface.csproj" />
+    <ProjectReference Include="..\DataAggregation.DoctorService\DataAggregation.DoctorService.csproj" />
   </ItemGroup>
 
 </Project>

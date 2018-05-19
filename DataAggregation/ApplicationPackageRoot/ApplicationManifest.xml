@@ -10,6 +10,10 @@
     <Parameter Name="NationalServiceInstanceName" DefaultValue="DataAggregation.NationalService" />
   </Parameters>
   <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="DataAggregation.NationalServicePkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides />
+  </ServiceManifestImport>
+  <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="DataAggregation.CountyServicePkg" ServiceManifestVersion="1.0.0" />
     <ConfigOverrides>
       <ConfigOverride Name="Config">

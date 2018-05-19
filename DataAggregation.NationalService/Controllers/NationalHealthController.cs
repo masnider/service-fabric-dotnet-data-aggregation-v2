@@ -1,0 +1,101 @@
+﻿// ------------------------------------------------------------
+//  Copyright (c) Microsoft Corporation.  All rights reserved.
+//  Licensed under the MIT License (MIT). See License.txt in the repo root for license information.
+// ------------------------------------------------------------
+
+namespace DataAggregation.NationalService
+{
+    using DataAggregation.Common.Types;
+    using DataAggregation.NationalService.Models;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.ServiceFabric.Data;
+    using Microsoft.ServiceFabric.Data.Collections;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    /// <summary>
+    /// Votes controller.
+    /// </summary>
+    public class NationalHealthController : Controller
+    {
+        private const string HealthStatusDictionary = "healthStatusDictionary";
+        private readonly IReliableStateManager stateManager;
+        private readonly ConcurrentBag<int> updatedCounties;
+
+
+        public NationalHealthController(IReliableStateManager stateManager, ConcurrentBag<int> updatedCounties)
+        {
+            this.stateManager = stateManager;
+            this.updatedCounties = updatedCounties;
+        }
+
+        /// <summary>
+        /// HttpPost /votes/update/{county}
+        /// </summary>
+        /// <param name="countyId"></param>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("national/health/{countyId}")]
+        public async Task Post(int countyId, CountyStatsViewModel status)
+        {
+            IReliableDictionary<int, NationalCountyStats> dictionary =
+                await this.stateManager.GetOrAddAsync<IReliableDictionary<int, NationalCountyStats>>(HealthStatusDictionary);
+
+            using (ITransaction tx = this.stateManager.CreateTransaction())
+            {
+                await dictionary.SetAsync(
+                    tx,
+                    countyId,
+                    new NationalCountyStats(
+                        status.DoctorCount,
+                        status.PatientCount,
+                        status.HealthReportCount,
+                        status.AverageHealthIndex));
+
+                this.updatedCounties.Add(countyId);
+
+                await tx.CommitAsync();
+            }
+
+            ServiceEventSource.Current.Message("National Service recieved and saved report {0}|{1}", countyId, status);
+            return;
+        }
+
+        /// <summary>
+        /// GET /votes/counties
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("national/health")]
+        public async Task<List<CountyHealth>> Get()
+        {
+            IReliableDictionary<int, NationalCountyStats> dictionary =
+                await this.stateManager.GetOrAddAsync<IReliableDictionary<int, NationalCountyStats>>(HealthStatusDictionary);
+
+            List<CountyHealth> countyData = new List<CountyHealth>();
+
+            IList<int> countiesToProcess = this.updatedCounties.ToArray();
+
+            foreach (int countyId in countiesToProcess)
+            {
+                using (ITransaction tx = this.stateManager.CreateTransaction())
+                {
+                    ConditionalValue<NationalCountyStats> result = await dictionary.TryGetValueAsync(tx, countyId);
+                    if (result.HasValue)
+                    {
+                        countyData.Add(new CountyHealth() { Id = countyId, Health = result.Value.AverageHealthIndex });
+                    }
+
+                    await tx.CommitAsync();
+                }
+
+                int tmp = countyId;
+                this.updatedCounties.TryTake(out tmp);
+            }
+
+            return countyData;
+        }
+    }
+}

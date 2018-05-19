@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAggregation.DeviceActor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAggregation.DoctorService", "DataAggregation.DoctorService\DataAggregation.DoctorService.csproj", "{9CA8657C-0039-49E6-AB8A-14F2FF5A3FB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAggregation.CountyService", "DataAggregation.CountyService\DataAggregation.CountyService.csproj", "{7F0C1B1F-5854-4850-8146-1F591D85484E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAggregation.CountyService", "DataAggregation.CountyService\DataAggregation.CountyService.csproj", "{7F0C1B1F-5854-4850-8146-1F591D85484E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAggregation.NationalService", "DataAggregation.NationalService\DataAggregation.NationalService.csproj", "{AF250BAB-10C2-42F6-8239-00E3EE458307}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,14 @@ Global
 		{7F0C1B1F-5854-4850-8146-1F591D85484E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7F0C1B1F-5854-4850-8146-1F591D85484E}.Release|x64.ActiveCfg = Release|Any CPU
 		{7F0C1B1F-5854-4850-8146-1F591D85484E}.Release|x64.Build.0 = Release|Any CPU
+		{AF250BAB-10C2-42F6-8239-00E3EE458307}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF250BAB-10C2-42F6-8239-00E3EE458307}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF250BAB-10C2-42F6-8239-00E3EE458307}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AF250BAB-10C2-42F6-8239-00E3EE458307}.Debug|x64.Build.0 = Debug|Any CPU
+		{AF250BAB-10C2-42F6-8239-00E3EE458307}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF250BAB-10C2-42F6-8239-00E3EE458307}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF250BAB-10C2-42F6-8239-00E3EE458307}.Release|x64.ActiveCfg = Release|Any CPU
+		{AF250BAB-10C2-42F6-8239-00E3EE458307}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

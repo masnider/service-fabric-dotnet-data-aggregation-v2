@@ -1,4 +1,5 @@
 ﻿using DataAggregation.Common.Types;
+using DataAggregation.DoctorService.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.ServiceFabric.Data;
 using Microsoft.ServiceFabric.Data.Collections;

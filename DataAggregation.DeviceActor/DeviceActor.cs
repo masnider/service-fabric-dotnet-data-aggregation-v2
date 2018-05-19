@@ -5,6 +5,7 @@
     using DataAggregation.Common.ServiceUtilities;
     using DataAggregation.Common.Types;
     using DataAggregation.DeviceCreationService;
+    using DataAggregation.DoctorService.Models;
     using Microsoft.ServiceFabric.Actors;
     using Microsoft.ServiceFabric.Actors.Runtime;
     using Microsoft.ServiceFabric.Data;

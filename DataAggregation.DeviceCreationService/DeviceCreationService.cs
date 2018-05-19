@@ -2,6 +2,7 @@
 using DataAggregation.Common.Http;
 using DataAggregation.Common.ServiceUtilities;
 using DataAggregation.Common.Types;
+using DataAggregation.DoctorService.Models;
 using Microsoft.ServiceFabric.Actors;
 using Microsoft.ServiceFabric.Actors.Client;
 using Microsoft.ServiceFabric.Services.Client;
