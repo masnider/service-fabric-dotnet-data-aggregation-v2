@@ -29,8 +29,8 @@
     /// </summary>
     internal sealed class CountyService : StatefulService
     {
-        internal const string ServiceTypeName = "HealthMetrics.CountyServiceType";
-        internal const string ConfigSectionName = "HealthMetrics.CountyService.Settings";
+        internal const string ServiceTypeName = "DataAggregation.CountyServiceType";
+        internal const string ConfigSectionName = "DataAggregation.CountyService.Settings";
         internal const string CountyNameDictionaryName = "CountyNames";
         internal const string CountyHealthDictionaryName = "{0}-Health";
         object ConfigPackageLockObject = new object();
@@ -61,7 +61,8 @@
             return new ServiceReplicaListener[]
             {
                 new ServiceReplicaListener(serviceContext =>
-                    new KestrelCommunicationListener(serviceContext, (url, listener) =>
+                {
+                    return new KestrelCommunicationListener(serviceContext, (url, listener) =>
                     {
                         ServiceEventSource.Current.ServiceMessage(serviceContext, $"Starting Kestrel on {url}");
 
@@ -76,9 +77,11 @@
                                     .UseServiceFabricIntegration(listener, ServiceFabricIntegrationOptions.UseUniqueServiceUrl)
                                     .UseUrls(url)
                                     .Build();
-                    }))
-            };
+                    }
+                    );
+            }, "CountyEndpoint")};
         }
+
 
         protected override async Task RunAsync(CancellationToken cancellationToken)
         {
@@ -164,7 +167,7 @@
 
                         ServiceUriBuilder serviceUri = new ServiceUriBuilder(this.GetSetting("NationalServiceInstanceName"));
 
-                        await FabricHttpClient.MakePostRequest<string, CountyStatsViewModel>(
+                        await FabricHttpClient.MakePostRequest<CountyStatsViewModel>(
                             serviceUri.ToUri(),
                             new ServicePartitionKey(),
                             "NationalEndpoint",

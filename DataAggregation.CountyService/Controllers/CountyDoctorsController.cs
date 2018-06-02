@@ -21,7 +21,6 @@ namespace DataAggregation.CountyService
     /// </summary>
     public class CountyDoctorsController : Controller
     {
-        private const string DoctorServiceName = "DoctorActorService";
         private readonly IReliableStateManager stateManager;
         private readonly HealthIndexCalculator indexCalculator;
 

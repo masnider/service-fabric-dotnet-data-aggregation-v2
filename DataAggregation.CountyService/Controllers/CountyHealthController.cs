@@ -75,7 +75,7 @@ namespace DataAggregation.CountyService
         /// <returns></returns>
         [HttpPost]
         [Route("county/health")]
-        public async Task Post([FromBody] List<DoctorStatsViewModel> stats)
+        public async Task Post([FromBody]List<DoctorStatsViewModel> stats)
         {
 
             try

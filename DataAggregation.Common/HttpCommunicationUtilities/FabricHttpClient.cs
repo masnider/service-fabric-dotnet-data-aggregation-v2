@@ -55,80 +55,24 @@ namespace System.Net.Http
             jSerializer = new JsonSerializer();  //todo - see if creating this on the fly is better or not 
         }
 
-        public static Task<TReturn> MakeGetRequest<TReturn>(
+        public static async Task<TReturn> MakeGetRequestAsync<TReturn>(
             Uri serviceName,
             ServicePartitionKey key,
             string endpointName,
             string requestPath,
-            CancellationToken ct
-        )
-        {
-            return MakeHttpRequest<TReturn, string>(
-                    serviceName,
-                    key,
-                    endpointName,
-                    requestPath,
-                    null,
-                    HttpVerb.GET,
-                    SerializationSelector.PBUF,
-                    ct
-                    );
-        }
-
-        public static Task<TReturn> MakePostRequest<TReturn, TPayload>(
-            Uri serviceName,
-            ServicePartitionKey key,
-            string endpointName,
-            string requestPath,
-            TPayload payload,
             SerializationSelector selector,
             CancellationToken ct
         )
         {
+            var servicePartitionClient = GetPartitionClient(serviceName, key, endpointName);
+            HttpRequestMessage msg = CreateRequestMessage(null, HttpVerb.GET, selector);
 
-            //Serializer.PrepareSerializer<TPayload>();
-
-            return MakeHttpRequest<TReturn, TPayload>(
-                    serviceName,
-                    key,
-                    endpointName,
-                    requestPath,
-                    payload,
-                    HttpVerb.POST,
-                    selector,
-                    ct
-                    );
-        }
-
-        private static Task<TReturn> MakeHttpRequest<TReturn, TPayload>(
-            Uri serviceName,
-            ServicePartitionKey key,
-            string endpointName,
-            string requestPath,
-            TPayload payload,
-            HttpVerb verb,
-            SerializationSelector selector,
-            CancellationToken ct
-        )
-        {
-            var servicePartitionClient = new ServicePartitionClient<HttpCommunicationClient>(
-                clientFactory,
-                serviceName,
-                key,
-                TargetReplicaSelector.Default,
-                endpointName,
-                new OperationRetrySettings()
-                );
-
-            return servicePartitionClient.InvokeWithRetryAsync(
-                async client =>
+            return await servicePartitionClient.InvokeWithRetryAsync<TReturn>(
+                async (client) =>
                 {
-                    HttpRequestMessage msg = null;
                     HttpResponseMessage response = null;
-
                     try
                     {
-
                         if (addresses.TryAdd(client.BaseAddress, true))
                         {
                             //https://aspnetmonsters.com/2016/08/2016-08-27-httpclientwrong/
@@ -139,43 +83,18 @@ namespace System.Net.Http
 
                         Uri newUri = new Uri(client.BaseAddress, requestPath.TrimStart('/'));
 
-                        switch (verb)
+                        msg.RequestUri = newUri;
+
+                        response = await httpClient.SendAsync(msg);
+
+                        if (selector == SerializationSelector.JSON)
                         {
-
-                            case HttpVerb.GET:
-
-                                msg = new HttpRequestMessage(HttpMethod.Get, newUri);
-
-                                if (selector == SerializationSelector.PBUF)
-                                {
-                                    msg.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-protobuf"));
-                                }
-                                else if (selector == SerializationSelector.JSON)
-                                {
-                                    msg.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                                }
-
-                                response = await httpClient.SendAsync(msg, HttpCompletionOption.ResponseHeadersRead, ct);
-                                break;
-
-                            case HttpVerb.POST:
-                                if (selector == SerializationSelector.JSON)
-                                {
-                                    response = await httpClient.PostAsync(newUri, new JsonContent(payload));
-                                }
-                                else if (selector == SerializationSelector.PBUF)
-                                {
-
-                                    response = await httpClient.PostAsync(newUri, new ProtoContent(payload));
-                                }
-                                break;
-
-                            default:
-                                throw new ArgumentException("Unsupported HTTP Verb submitted for HTTP message in HTTPClientExtension");
+                            return await ReturnJsonResult<TReturn>(response);
                         }
-
-                        return (selector == SerializationSelector.JSON) ? await ReturnJsonResult<TReturn>(response) : await ReturnPBufResult<TReturn>(response);
-
+                        else
+                        {
+                            return await ReturnPBufResult<TReturn>(response);
+                        }
                     }
                     catch (Exception e)
                     {
@@ -183,6 +102,88 @@ namespace System.Net.Http
                         throw;
                     }
                 }, ct);
+        }
+
+        public static async Task<bool> MakePostRequest<TPayload>(
+            Uri serviceName,
+            ServicePartitionKey key,
+            string endpointName,
+            string requestPath,
+            TPayload payload,
+            SerializationSelector selector,
+            CancellationToken ct
+        )
+        {
+            var servicePartitionClient = GetPartitionClient(serviceName, key, endpointName);
+            HttpRequestMessage msg = CreateRequestMessage(payload, HttpVerb.POST, selector);
+
+            return await servicePartitionClient.InvokeWithRetryAsync(
+                async (client) =>
+                {
+                    HttpResponseMessage response = null;
+                    try
+                    {
+                        if (addresses.TryAdd(client.BaseAddress, true))
+                        {
+                            //https://aspnetmonsters.com/2016/08/2016-08-27-httpclientwrong/
+                            //but then http://byterot.blogspot.co.uk/2016/07/singleton-httpclient-dns.html
+                            //so we do this ala https://github.com/NimaAra/Easy.Common/blob/master/Easy.Common/RestClient.cs
+                            ServicePointManager.FindServicePoint(client.BaseAddress).ConnectionLeaseTimeout = 60 * 1000;
+                        }
+
+                        Uri newUri = new Uri(client.BaseAddress, requestPath.TrimStart('/'));
+
+                        msg.RequestUri = newUri;
+
+                        response = await httpClient.SendAsync(msg);
+
+                        return response.IsSuccessStatusCode;
+                    }
+                    catch (Exception e)
+                    {
+                        var x = e;
+                        throw;
+                    }
+                }, ct);
+
+        }
+        private static HttpRequestMessage CreateRequestMessage(object payload, HttpVerb verb, SerializationSelector selector)
+        {
+            HttpRequestMessage msg = new HttpRequestMessage();
+
+            if (selector == SerializationSelector.PBUF)
+            {
+                msg.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-protobuf"));
+            }
+            else if (selector == SerializationSelector.JSON)
+            {
+                msg.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            }
+
+            switch (verb)
+            {
+                case HttpVerb.GET:
+                    msg.Method = HttpMethod.Get;
+                    break;
+
+                case HttpVerb.POST:
+                    msg.Method = HttpMethod.Post;
+                    break;
+            }
+
+            if (payload != null)
+            {
+                if (selector == SerializationSelector.JSON)
+                {
+                    msg.Content = new JsonContent(payload);
+                }
+                else if (selector == SerializationSelector.PBUF)
+                {
+                    msg.Content = new ProtoContent(payload);
+                }
+            }
+
+            return msg;
         }
 
         private static async Task<TReturn> ReturnJsonResult<TReturn>(HttpResponseMessage response)
@@ -202,6 +203,18 @@ namespace System.Net.Http
         private static async Task<TReturn> ReturnPBufResult<TReturn>(HttpResponseMessage response)
         {
             return Serializer.Deserialize<TReturn>(await response.Content.ReadAsStreamAsync());
+        }
+
+        private static ServicePartitionClient<HttpCommunicationClient> GetPartitionClient(Uri serviceName, ServicePartitionKey key, string endpointName)
+        {
+            return new ServicePartitionClient<HttpCommunicationClient>(
+                clientFactory,
+                serviceName,
+                key,
+                TargetReplicaSelector.Default,
+                endpointName,
+                new OperationRetrySettings()
+                );
         }
 
     }

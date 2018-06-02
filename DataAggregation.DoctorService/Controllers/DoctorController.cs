@@ -122,7 +122,7 @@ namespace DataAggregation.DoctorService
                 throw;
             }
 
-            ServiceEventSource.Current.Message("Successfully handled patient health reprot D_ID {0} P_ID {1} Count {2}", doctorId, personId, doctorHealthReportCount);
+            ServiceEventSource.Current.Message("Successfully handled patient health report Doc_ID {0} Person_ID {1} Count {2}", doctorId, personId, doctorHealthReportCount);
             return;
         }
     }

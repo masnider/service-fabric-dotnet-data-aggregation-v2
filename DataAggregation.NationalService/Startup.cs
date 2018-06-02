@@ -24,7 +24,6 @@ namespace DataAggregation.NationalService
             services.AddMvc(options =>
             {
                 options.InputFormatters.Add(new ProtobufInputFormatter());
-                //options.OutputFormatters.Add(new ProtobufOutputFormatter());
                 options.FormatterMappings.SetMediaTypeMappingForFormat("protobuf", "application/x-protobuf");
             });
 

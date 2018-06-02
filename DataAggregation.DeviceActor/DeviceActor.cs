@@ -132,10 +132,10 @@
                 await this.StateManager.GetStateAsync<HealthIndex>("HealthIndex")
                 );
 
-            await FabricHttpClient.MakePostRequest<string, PatientRegistrationRecord>(
+            await FabricHttpClient.MakePostRequest<PatientRegistrationRecord>(
                     this.doctorServiceUri,
                     new ServicePartitionKey(HashUtil.getLongHashCode(docIdStr)),
-                    "ServiceEndpoint",
+                    "DoctorEndpoint",
                     "/doctor/new/patient/" + docIdStr,
                     prr,
                     SerializationSelector.PBUF,
@@ -166,10 +166,10 @@
 
                 await this.SaveHealthDataAsync(record);
 
-                await FabricHttpClient.MakePostRequest<string, HeartRateRecord>(
+                await FabricHttpClient.MakePostRequest<HeartRateRecord>(
                     this.doctorServiceUri,
                     this.doctorServicePartitionKey,
-                    "ServiceEndpoint",
+                    "DoctorEndpoint",
                     "doctor/health/" + docIdStr + "/" + this.Id.GetGuidId(),
                     record,
                     SerializationSelector.PBUF,

@@ -74,7 +74,6 @@
                     }
                     );
                 }, "DoctorEndpoint")};
-
         }
 
 
@@ -153,13 +152,13 @@
                             countyDoctorStats.Add(new DoctorStatsViewModel(docInfo.Key, info.Key, patientCount, healthReportCount, avgHealthIndex, docInfo.Value));
                         }
 
-                        await FabricHttpClient.MakePostRequest<string, List<DoctorStatsViewModel>>(
+                        await FabricHttpClient.MakePostRequest<List<DoctorStatsViewModel>>(
                             this.CountyServiceUri,
                             new ServicePartitionKey(info.Key),
-                            "ServiceEndpoint",
+                            "CountyEndpoint",
                             "county/health/",
                             countyDoctorStats,
-                            SerializationSelector.PBUF,
+                            SerializationSelector.JSON,
                             cancellationToken
                             );
                     }

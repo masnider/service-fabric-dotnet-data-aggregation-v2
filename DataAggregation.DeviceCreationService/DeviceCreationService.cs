@@ -101,7 +101,7 @@ namespace DataAggregation.DeviceCreationService
                         var dcr = new DoctorCreationRecord(doctorName, doctorId, randomCountyRecord);
                         ServicePartitionKey key = new ServicePartitionKey(HashUtil.getLongHashCode(bandActorInfo.DoctorId.ToString()));
 
-                        await FabricHttpClient.MakePostRequest<string, DoctorCreationRecord>(
+                        await FabricHttpClient.MakePostRequest<DoctorCreationRecord>(
                             this.DoctorServiceUri,
                             key,
                             "DoctorEndpoint",

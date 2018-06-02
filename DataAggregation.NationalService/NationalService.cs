@@ -23,7 +23,7 @@ namespace DataAggregation.NationalService
     /// 
     public class NationalService : StatefulService
     {
-        public const string ServiceTypeName = "HealthMetrics.NationalServiceType";
+        public const string ServiceTypeName = "DataAggregation.NationalServiceType";
         private const string HealthStatusDictionary = "healthStatusDictionary";
         private const string TimeStatsDictionary = "TimeTracker";
         private readonly ConcurrentDictionary<string, long> statsDictionary = new ConcurrentDictionary<string, long>();
