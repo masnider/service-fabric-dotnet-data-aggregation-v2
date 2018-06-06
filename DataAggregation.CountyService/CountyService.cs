@@ -71,7 +71,8 @@
                                     .ConfigureServices(
                                         services => services
                                             .AddSingleton<StatefulServiceContext>(serviceContext)
-                                            .AddSingleton<IReliableStateManager>(this.StateManager))
+                                            .AddSingleton<IReliableStateManager>(this.StateManager)
+                                            .AddSingleton<HealthIndexCalculator>(this.indexCalculator))
                                     .UseContentRoot(Directory.GetCurrentDirectory())
                                     .UseStartup<Startup>()
                                     .UseServiceFabricIntegration(listener, ServiceFabricIntegrationOptions.UseUniqueServiceUrl)
@@ -79,7 +80,7 @@
                                     .Build();
                     }
                     );
-            }, "CountyEndpoint")};
+        }, "CountyEndpoint")};
         }
 
 

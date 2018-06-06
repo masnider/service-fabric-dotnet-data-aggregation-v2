@@ -158,7 +158,7 @@
                             "CountyEndpoint",
                             "county/health/",
                             countyDoctorStats,
-                            SerializationSelector.JSON,
+                            SerializationSelector.PBUF,
                             cancellationToken
                             );
                     }

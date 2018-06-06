@@ -13,7 +13,6 @@ namespace System.Net.Http
     using Microsoft.ServiceFabric.Services.Communication.Client;
     using Newtonsoft.Json;
     using ProtoBuf;
-    using ProtoBuf.Meta;
     using System.Collections.Concurrent;
     using System.Fabric;
     using System.IO;
@@ -44,7 +43,7 @@ namespace System.Net.Http
 
             //https://stackoverflow.com/questions/7372585/protobuf-net-exception-timeout-while-inspecting-metadata
             //https://stackoverflow.com/questions/17096359/is-protobuf-net-thread-safe 
-            RuntimeTypeModel.Default.MetadataTimeoutMilliseconds = 300000;
+            //RuntimeTypeModel.Default.MetadataTimeoutMilliseconds = 300000;
 
             clientFactory = new HttpCommunicationClientFactory(
                 ServicePartitionResolver.GetDefault(),

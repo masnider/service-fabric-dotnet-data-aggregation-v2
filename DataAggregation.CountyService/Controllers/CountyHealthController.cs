@@ -27,7 +27,6 @@ namespace DataAggregation.CountyService
         /// Reliable object state manager.
         /// </summary>
         private readonly IReliableStateManager stateManager;
-
         private readonly HealthIndexCalculator indexCalculator;
 
         /// <summary>
