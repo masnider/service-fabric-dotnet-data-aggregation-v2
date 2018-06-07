@@ -38,7 +38,7 @@ namespace DataAggregation.NationalService
         /// <returns></returns>
         [HttpPost]
         [Route("national/health/{countyId}")]
-        public async Task Post(int countyId, CountyStatsViewModel status)
+        public async Task Post(int countyId, [FromBody]CountyStatsViewModel status)
         {
             IReliableDictionary<int, NationalCountyStats> dictionary =
                 await this.stateManager.GetOrAddAsync<IReliableDictionary<int, NationalCountyStats>>(HealthStatusDictionary);

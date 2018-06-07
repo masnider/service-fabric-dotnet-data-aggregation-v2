@@ -9,8 +9,12 @@ namespace DataAggregation.Common.Types
     //using System.Runtime.Serialization;
 
     [ProtoContract]
-    public struct CountyStatsViewModel
+    public class CountyStatsViewModel
     {
+        public CountyStatsViewModel()
+        {
+        }
+
         public CountyStatsViewModel(int doctorCount, int patientCount, long healthReportCount, HealthIndex averageHealthIndex)
         {
             this.AverageHealthIndex = averageHealthIndex;
