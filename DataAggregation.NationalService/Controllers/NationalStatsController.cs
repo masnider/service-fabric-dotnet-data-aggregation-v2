@@ -62,7 +62,6 @@ namespace DataAggregation.NationalService
                         this.statsDictionary["totalDoctors"],
                         this.statsDictionary["totalPatientCount"],
                         this.statsDictionary["totalHealthReportCount"],
-                        0,
                         offset);
 
                     return model;

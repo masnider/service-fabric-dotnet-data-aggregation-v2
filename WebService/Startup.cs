@@ -1,4 +1,3 @@
-using DataAggregation.Common.ProtoStuff;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -14,12 +13,13 @@ namespace DataAggregation.WebService
     // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddMvc(options =>
-      {
-        options.InputFormatters.Add(new ProtobufInputFormatter());
-        options.OutputFormatters.Add(new ProtobufOutputFormatter());
-        options.FormatterMappings.SetMediaTypeMappingForFormat("protobuf", "application/x-protobuf");
-      });
+      services.AddMvc();
+      //services.AddMvc(options =>
+      //{
+      //  options.InputFormatters.Add(new ProtobufInputFormatter());
+      //  options.OutputFormatters.Add(new ProtobufOutputFormatter());
+      //  options.FormatterMappings.SetMediaTypeMappingForFormat("protobuf", "application/x-protobuf");
+      //});
 
       services.AddResponseCompression(options =>
       {

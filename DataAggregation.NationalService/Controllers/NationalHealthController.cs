@@ -31,7 +31,7 @@ namespace DataAggregation.NationalService
         }
 
         /// <summary>
-        /// HttpPost /votes/update/{county}
+        /// HttpPost national/health/{countyId}
         /// </summary>
         /// <param name="countyId"></param>
         /// <param name="status"></param>

@@ -13,9 +13,8 @@ namespace DataAggregation.Common.Types
     [ProtoContract]
     public struct NationalStatsViewModel
     {
-        public NationalStatsViewModel(long doctorCount, long patientCount, long healthReportCount, long averageHealthIndex, DateTimeOffset creationDateTime)
+        public NationalStatsViewModel(long doctorCount, long patientCount, long healthReportCount, DateTimeOffset creationDateTime)
         {
-            this.AverageHealthIndex = averageHealthIndex;
             this.DoctorCount = doctorCount;
             this.PatientCount = patientCount;
             this.HealthReportCount = healthReportCount;
@@ -36,10 +35,6 @@ namespace DataAggregation.Common.Types
 
         [DataMember]
         [ProtoMember(4)]
-        public long AverageHealthIndex { get; private set; }
-
-        [DataMember]
-        [ProtoMember(5)]
         public DateTimeOffsetSurrogate StartTimeOffset { get; set; }
 
     }

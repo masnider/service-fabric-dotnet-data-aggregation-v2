@@ -1,10 +1,24 @@
+using DataAggregation.Common;
+using DataAggregation.Common.ServiceUtilities;
+using DataAggregation.Common.Types;
+using DataAggregation.CountyService.Models;
+using DataAggregation.DeviceCreationService;
+using DataAggregation.NationalService.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.ServiceFabric.Actors;
+using Microsoft.ServiceFabric.Actors.Client;
+using Microsoft.ServiceFabric.Actors.Query;
+using Microsoft.ServiceFabric.Services.Client;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Fabric;
 using System.Fabric.Description;
+using System.Fabric.Query;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace DataAggregation.WebService
 {
@@ -12,16 +26,46 @@ namespace DataAggregation.WebService
   public class DefaultApiController : Controller
   {
     private readonly KeyedCollection<string, ConfigurationProperty> configPackageSettings;
+    private readonly string DeviceServiceName = "DeviceActorServiceName";
+    private readonly string CountyServiceName = "CountyServiceInstanceName";
+    private readonly string NationalServiceName = "NationalServiceInstanceName";
+
     public DefaultApiController()
     {
       this.configPackageSettings = FabricRuntime.GetActivationContext().GetConfigurationPackageObject("Config").Settings.Sections["DataAggregation.WebService.Settings"].Parameters;
     }
 
-    // GET: api
-    public IEnumerable<string> Get()
+    [HttpGet]
+    [Route("settings/{setting}")]
+    public Task<string> GetSettingValue(string setting)
     {
-      Random r = new Random();
-      return new string[] { "value1" + r.Next(), "value2" + r.Next() };
+      return Task.FromResult<string>(this.GetSetting(setting));
+    }
+
+    [HttpGet]
+    [Route("national/health")]
+    public async Task<List<CountyHealth>> GetNationalHealth()
+    {
+      try
+      {
+        ServiceUriBuilder serviceUri = new ServiceUriBuilder(this.GetSetting(NationalServiceName));
+
+        var result = await FabricHttpClient.MakeGetRequestAsync<List<CountyHealth>>(
+            serviceUri.ToUri(),
+            new ServicePartitionKey(),
+            "NationalEndpoint",
+            "/national/health",
+            SerializationSelector.PBUF,
+            CancellationToken.None
+            );
+
+        return result;
+      }
+      catch (Exception e)
+      {
+        ServiceEventSource.Current.Message("Exception in Web API Controller getting national health {0}", e);
+        throw;
+      }
     }
 
     [HttpGet]
@@ -99,11 +143,174 @@ namespace DataAggregation.WebService
 
     }
 
-    // GET api/values/5
-    [HttpGet("{id}")]
-    public string Get(int id)
+    [HttpGet]
+    [Route("national/stats")]
+    public async Task<NationalStatsViewModel> GetNationalStats()
     {
-      return string.Format("value:{0}", id);
+      try
+      {
+
+        ServiceUriBuilder serviceUri = new ServiceUriBuilder(this.GetSetting(NationalServiceName));
+        var key = new ServicePartitionKey();
+        var result = await FabricHttpClient.MakeGetRequestAsync<NationalStatsViewModel>(
+            serviceUri.ToUri(),
+            key,
+            "NationalEndpoint",
+            "/national/stats",
+            SerializationSelector.PBUF,
+            CancellationToken.None
+            );
+
+        return result;
+      }
+      catch (Exception e)
+      {
+        ServiceEventSource.Current.Message("Exception in Web API Controller getting national stats {0}", e);
+        throw;
+      }
+    }
+
+    [HttpGet]
+    [Route("county/{countyId}/doctors/")]
+    public async Task<IEnumerable<KeyValuePair<Guid, CountyDoctorStats>>> GetDoctors(int countyId)
+    {
+      try
+      {
+        ServiceUriBuilder serviceUri = new ServiceUriBuilder(this.GetSetting(CountyServiceName));
+
+        var result = await FabricHttpClient.MakeGetRequestAsync<IEnumerable<KeyValuePair<Guid, CountyDoctorStats>>>(
+            serviceUri.ToUri(),
+            new ServicePartitionKey(countyId),
+            "CountyEndpoint",
+            "/county/doctors/" + countyId,
+            SerializationSelector.PBUF,
+            CancellationToken.None
+            );
+
+        return result;
+      }
+      catch (Exception e)
+      {
+        ServiceEventSource.Current.Message("Exception in Web API Controller getting county {0} doctors: {1}", countyId, e);
+        throw;
+      }
+    }
+
+    [HttpGet]
+    [Route("county/{countyId}/health/")]
+    public async Task<HealthIndex> GetCountyHealth(int countyId)
+    {
+
+      try
+      {
+        ServiceUriBuilder serviceUri = new ServiceUriBuilder(this.GetSetting(CountyServiceName));
+
+        var result = await FabricHttpClient.MakeGetRequestAsync<HealthIndex>(
+            serviceUri.ToUri(),
+            new ServicePartitionKey(countyId),
+            "CountyEndpoint",
+            "/county/health/" + countyId,
+            SerializationSelector.PBUF,
+            CancellationToken.None
+            );
+
+        return result;
+      }
+      catch (Exception e)
+      {
+        ServiceEventSource.Current.Message("Exception in Web API Controller getting county {0} health {1}", countyId, e);
+        throw;
+      }
+    }
+
+    [HttpGet]
+    [Route("patients/{deviceId}")]
+    public async Task<DeviceDataViewModel> GetPatientData(Guid deviceId)
+    {
+      try
+      {
+        ActorId deviceActorid = new ActorId(deviceId);
+        ServiceUriBuilder serviceUri = new ServiceUriBuilder(this.GetSetting(DeviceServiceName));
+
+        IDeviceActor actor = ActorProxy.Create<IDeviceActor>(deviceActorid, serviceUri.ToUri());
+        var result = await actor.GetDeviceDataAsync();
+
+
+        return result;
+      }
+      catch (AggregateException ae)
+      {
+        ServiceEventSource.Current.Message("Exception in Web ApiController {0}", ae.InnerException);
+        throw ae.InnerException;
+      }
+    }
+
+    [HttpGet]
+    [Route("GetIds")]
+    public async Task<KeyValuePair<string, string>> GetPatientId()
+    {
+      return await this.GetRandomIdsAsync();
+    }
+
+    private string GetSetting(string key)
+    {
+      return this.configPackageSettings[key].Value;
+    }
+
+    private async Task<KeyValuePair<string, string>> GetRandomIdsAsync()
+    {
+      ServiceUriBuilder serviceUri = new ServiceUriBuilder(this.GetSetting(DeviceServiceName));
+      Uri fabricServiceName = serviceUri.ToUri();
+
+      CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromMinutes(5));
+      CancellationToken token = cts.Token;
+      FabricClient fc = new FabricClient();
+      ServicePartitionList partitions = await fc.QueryManager.GetPartitionListAsync(fabricServiceName);
+
+      string doctorId = null;
+
+      while (!token.IsCancellationRequested && doctorId == null)
+      {
+        try
+        {
+          foreach (Partition p in partitions)
+          {
+            long partitionKey = ((Int64RangePartitionInformation)p.PartitionInformation).LowKey;
+            token.ThrowIfCancellationRequested();
+            ContinuationToken queryContinuationToken = null;
+            IActorService proxy = ActorServiceProxy.Create(fabricServiceName, partitionKey);
+            PagedResult<ActorInformation> result = await proxy.GetActorsAsync(queryContinuationToken, token);
+            foreach (ActorInformation info in result.Items)
+            {
+              token.ThrowIfCancellationRequested();
+
+              ActorId deviceActorId = info.ActorId;
+              IDeviceActor deviceActor = ActorProxy.Create<IDeviceActor>(deviceActorId, fabricServiceName);
+
+              try
+              {
+                doctorId = (await deviceActor.GetAssociatedDoctorAsync()).ToString();
+
+                return new KeyValuePair<string, string>(deviceActorId.ToString(), doctorId);
+              }
+              catch (Exception e)
+              {
+                ServiceEventSource.Current.Message("Exception when obtaining actor ID. No State? " + e.ToString());
+                continue;
+              }
+
+            }
+            //otherwise we will bounce around other partitions until we find an actor
+          }
+        }
+        catch (Exception e)
+        {
+          ServiceEventSource.Current.Message("Exception when obtaining actor ID: " + e.ToString());
+          continue;
+        }
+      }
+
+      throw new InvalidOperationException("Couldn't find actor within timeout");
     }
   }
 }

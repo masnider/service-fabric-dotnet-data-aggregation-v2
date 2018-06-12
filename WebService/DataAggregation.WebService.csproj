@@ -36,6 +36,7 @@
     <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.0" />
     <PackageReference Include="Microsoft.ServiceFabric" Version="6.2.283" />
+    <PackageReference Include="Microsoft.ServiceFabric.Actors" Version="3.1.283" />
     <PackageReference Include="Microsoft.ServiceFabric.AspNetCore.Kestrel" Version="3.1.283" />
     <PackageReference Include="Microsoft.ServiceFabric.Data" Version="3.1.283" />
     <PackageReference Include="Microsoft.ServiceFabric.Services" Version="3.1.283" />
@@ -43,6 +44,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataAggregation.Common\DataAggregation.Common.csproj" />
+    <ProjectReference Include="..\DataAggregation.CountyService\DataAggregation.CountyService.csproj" />
+    <ProjectReference Include="..\DataAggregation.DeviceActor.Interface\DataAggregation.DeviceActor.Interface.csproj" />
+    <ProjectReference Include="..\DataAggregation.NationalService\DataAggregation.NationalService.csproj" />
   </ItemGroup>
 
   <ItemGroup>

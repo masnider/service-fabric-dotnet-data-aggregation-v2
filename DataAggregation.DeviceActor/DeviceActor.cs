@@ -47,6 +47,17 @@
         {
         }
 
+        public async Task<Guid> GetAssociatedDoctorAsync()
+        {
+            ConditionalValue<Guid> DoctorInfoResult = await this.StateManager.TryGetStateAsync<Guid>("DoctorId");
+            if (DoctorInfoResult.HasValue)
+            {
+                return DoctorInfoResult.Value;
+            }
+
+            throw new ArgumentException(string.Format("No band actor state {0}|{1}", this.Id, this.Id.Kind));
+        }
+
         public async Task<DeviceDataViewModel> GetDeviceDataAsync()
         {
             try
