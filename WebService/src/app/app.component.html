@@ -22,10 +22,6 @@
           <div id="userInfo-countyHealthIndex" class="name-and-healthbox clearfix"></div>
           <div id="userUnfo-detailStats">
             <div id="heartRateTable" class="chartStyle"></div>
-            <h1>Application says what?</h1>
-            <ul>
-              <li *ngFor="let value of apiValues">{{value}}</li>
-            </ul>
             <h3>Heart Rate</h3>
             <app-line-chart></app-line-chart>
           </div>
@@ -38,12 +34,12 @@
       </div>
     </div>
     <div id="map">
-      <div id="dataStats">
+      <div id="dataStats" *ngIf="statsData">
         <ul>
-          <li><span class="statsLabel">Devices:</span><span id="bandsStats">0</span></li>
-          <li><span class="statsLabel">Doctors:</span><span id="doctorsStats">0</span></li>
-          <li><span class="statsLabel">Health Reports:</span><span id="healthReportsStats">0</span></li>
-          <li><span class="statsLabel">Avg. Reports/Sec:</span><span id="messageRate">0</span></li>
+          <li><span class="statsLabel">Devices:</span><span id="bandsStats">{{statsData.patientCount}}</span></li>
+          <li><span class="statsLabel">Doctors:</span><span id="doctorsStats">{{statsData.doctorCount}}</span></li>
+          <li><span class="statsLabel">Health Reports:</span><span id="healthReportsStats">{{statsData.healthReportCount}}</span></li>
+          <li><span class="statsLabel">Avg. Reports/Sec:</span><span id="messageRate">{{averageData.currentAverage}}</span></li>
         </ul>
       </div>
       <div id="mapContainer">

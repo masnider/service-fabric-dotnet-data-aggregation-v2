@@ -20,11 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.1.1" />
     <PackageReference Include="Microsoft.ServiceFabric" Version="6.2.283" />
     <PackageReference Include="Microsoft.ServiceFabric.Services" Version="3.1.283" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="protobuf-net" Version="2.3.7" />
+    <PackageReference Include="protobuf-net" Version="2.3.13" />
   </ItemGroup>
 
   <ItemGroup>
