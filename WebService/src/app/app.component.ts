@@ -38,45 +38,41 @@ export class AppComponent implements OnInit {
 
   getTotalStats() {
     this._httpService.get('/api/national/stats').subscribe(values => {
-      let data = values.json();
-      this.statsData = data;
-      //if (this.statsData != null) {
-      //  console.log(this.statsData);
-      //  console.log(this.statsData["healthReportCount"]);
-      //}
+      this.statsData = values.json();
     })
 
-    if (this.averageData.lastHealthReportCount == 0) {
-      console.log("report count 0 on first load");
-      this.averageData.lastHealthReportCount = this.statsData["healthReportCount"];
-      console.log("backfilled report count" + this.averageData.lastHealthReportCount);
-      this.averageData.lastReportedTime = new Date(this.statsData["startTimeOffset"]["dateTimeString"]);
-      console.log("last reported time is " + this.averageData.lastReportedTime + " as value " + this.averageData.lastReportedTime.valueOf());
+    //bail out if we don't have any data yet
+    if (this.statsData == null) return;
 
+    if (this.averageData.lastHealthReportCount == 0) {
+      //first page load so average data is empty
+      //get the current count of health reports from the service data that came back
+      this.averageData.lastHealthReportCount = this.statsData["healthReportCount"];
+      this.averageData.lastReportedTime = new Date(this.statsData["startTimeOffset"]["dateTimeString"]);
+
+      //figure out the time between when the service was created and now
+      //so that you can figure out the messages/second so far
       let currentTime = new Date();
       let deltaTimeSinceLastReport = (currentTime.valueOf() - this.averageData.lastReportedTime.valueOf()) / 1000;
-      console.log("time passed since last check " + deltaTimeSinceLastReport);
-
       this.averageData.currentAverage = Math.round((this.averageData.lastHealthReportCount / deltaTimeSinceLastReport) * 100) / 100;
-      console.log("computed average is " + this.averageData.currentAverage);
     }
     else {
-      console.log("prior average: " + this.averageData.currentAverage);
-      console.log("prior count of health report checks: " + this.averageData.lastHealthReportCount);
+
+      //subsequent calls to check for new health reports
+      //find out how many health reports we have now vs the last time we checked
       let deltaReportCountSinceLastReport = this.statsData["healthReportCount"] - this.averageData.lastHealthReportCount;
-      console.log("health reports since last check " + deltaReportCountSinceLastReport);
+
+      //figure out how much time has elapsed since the last report
       let currentTime = new Date();
       let deltaTimeSinceLastReport = (currentTime.valueOf() - this.averageData.lastReportedTime.valueOf()) / 1000;
-      console.log("time passed since last check " + deltaTimeSinceLastReport);
 
+      //compute the average number of health reports per second
+      //based on elapsed time since last check and number of messages since then
       this.averageData.currentAverage = Math.round((deltaReportCountSinceLastReport / deltaTimeSinceLastReport) * 100) / 100;
-      console.log("new current average " + this.averageData.currentAverage);
-
+      
+      //save the necessary info for the next round
       this.averageData.lastHealthReportCount = this.statsData["healthReportCount"];
-      console.log("updated total health report count " + this.averageData.lastHealthReportCount);
-
       this.averageData.lastReportedTime = currentTime;
-      console.log("updated last report time");
     }
   }
 }
