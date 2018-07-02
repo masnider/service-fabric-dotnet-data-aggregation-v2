@@ -5,7 +5,7 @@
 
 namespace DataAggregation.Common.Types
 {
-    using global::ProtoBuf; //TODO - Why?
+    using ProtoBuf;
     using System;
     using System.Collections.Generic;
     using System.Runtime.Serialization;

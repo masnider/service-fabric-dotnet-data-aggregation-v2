@@ -76,7 +76,6 @@
                 }, "DoctorEndpoint")};
         }
 
-
         protected override async Task RunAsync(CancellationToken cancellationToken)
         {
 

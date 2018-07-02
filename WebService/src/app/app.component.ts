@@ -10,8 +10,9 @@ import { Http } from '@angular/http';
 export class AppComponent implements OnInit {
 
   private healthReportCheckFrequencyInMs: number = 5000;
-  private chartData: Array<any>;
-  private mapData: Array<any>;
+  private deviceId: string;
+  private doctorId: string;
+  private mapData: Array<any> = [];
   private statsData: JSON = null;
   private averageData: IAverageDataClass = <IAverageDataClass>{
     lastReportedTime: null,
@@ -24,13 +25,23 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.generateMapData();
+      this.getIds();
       setInterval(() => this.generateMapData(), 3000);
       setInterval(() => this.getTotalStats(), this.healthReportCheckFrequencyInMs);
     }, 1000);
   }
 
+  getIds()
+  {
+    this._httpService.get('/api/GetIds').subscribe(values => {
+      let data = values.json() as string[];
+      this.deviceId = data["key"];
+      this.doctorId = data["value"];
+      console.log(this.deviceId + ":" + this.doctorId);
+    })
+  }
+
   generateMapData() {
-    this.mapData = [];
     this._httpService.get('/api/mapData').subscribe(values => {
       this.mapData = values.json() as string[];
     })
