@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   private deviceId: string;
   private doctorId: string;
   private mapData: Array<any> = [];
-  private lineData: JSON = null;
+  private lineData: Array<JSON> = null;
   private statsData: JSON = null;
   private averageData: IAverageDataClass = <IAverageDataClass>{
     lastReportedTime: null,
@@ -94,8 +94,6 @@ export class AppComponent implements OnInit {
       d3.json("/api/patients/" + this.deviceId + "/", (callback, data: any) => {
         data = data["heartRateHistory"];
         this.lineData = data;
-        console.log("new data");
-        console.log(this.lineData);
       });
     }
   }

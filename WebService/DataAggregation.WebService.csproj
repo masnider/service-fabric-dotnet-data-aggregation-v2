@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
     <IsServiceFabricServiceProject>True</IsServiceFabricServiceProject>
-    <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
+    <!--<TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>-->
     <RootNamespace>DataAggregation.WebService</RootNamespace>
   </PropertyGroup>
 
