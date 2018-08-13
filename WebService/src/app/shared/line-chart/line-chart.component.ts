@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges, ViewChild, ElementRef, Input, ViewEncapsulation, SimpleChanges } from '@angular/core';
 import * as d3 from 'd3';
 import * as c3 from 'c3';
+import { ChartAPI } from 'c3';
 //import { Transition, transition as d3Transition } from 'd3-transition';
 //import { axisBottom, axisLeft } from 'd3-axis';
 
@@ -19,271 +20,133 @@ export class LineChartComponent implements OnInit, OnChanges
   private width: number;
   private height: number;
   private created: boolean = false;
-  //private d3precision: number = d3.precisionFixed(0.5);
-  //private d3format: any = d3.format("." + this.d3precision + "f");
-  private extractDateFunc: (d: any) => Date = (d) => { return new Date(d['timestamp']['dateTimeString']) };
-  //private extractHrFunc: any = (d) => { return +d['heartRate'] };
-  //private d3Line: any = null;
-
-  //private transition: Transition<any, any, any, any> = d3Transition().duration(500).ease(d3.easeLinear);
-  //private xAxis: any = null;
+  private chart: ChartAPI = null;
 
   constructor() { }
 
   ngOnInit()
   {
-    //this.createChart();
+
   }
 
   ngOnChanges(changes: SimpleChanges)
   {
     if (changes.lineData.previousValue != null && changes.lineData.currentValue != null)
     {
-      if (!this.created)
-      {
-        this.createChart(changes);
-      }
-      else
-      {
-        //console.log(changes.lineData.currentValue);
-        this.updateChart(changes);
-      }
+      this.createChart(changes);
     }
   }
 
   createChart(changes: SimpleChanges)
   {
-    //const element = this.chartContainer.nativeElement;
-    //this.width = element.offsetWidth - this.margin.left - this.margin.right;
-    //this.height = element.offsetHeight - this.margin.top - this.margin.bottom;
-    //var that = this;
-
-    //let svg = d3.select(element).append("svg")
-    //  .attr("width", this.width + this.margin.left + this.margin.right)
-    //  .attr("height", this.height + this.margin.top + this.margin.bottom)
-    //  .append("g")
-    //  .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
-
-    //console.log(changes.lineData.currentValue);
-
+    let oldDataDictionary = {};
+    let newDataDictionary = {};
+    let newItemCount = 0;
     let xList = [];
     let yList = [];
+    let newXList = [];
+    let newYList = [];
     xList.push("timeStamp");
     yList.push("stress");
-
-    changes.lineData.currentValue.forEach(obj =>
-      {
-      yList.push(obj['heartRate']);
-      xList.push(this.extractDateFunc(obj).valueOf());
-      }
-    );
-
-
-    var chart = c3.generate({
-      bindto: '#heartRateTable',
-      data: {
-        x: 'timeStamp',
-        columns: [
-          xList,
-          yList
-        ],
-        type: 'line'
-      },
-      axis: {
-        x: {
-          type: 'timeseries',
-          tick: {
-            format: '%Y-%m-%d'
-          }
-        },
-        y: {
-          max: 1,
-          min: 0,
-          label: {
-            text: 'Stress',
-            position: 'outer-middle'
-          },
-          tick: {
-            count: 3
-          }
-        }
-      }
-    });
+    newXList.push("timeStamp");
+    newYList.push("stress");
 
     
-
-    //let xScale = this.extractXScale(changes.lineData.currentValue);
-    ////console.log("xscale set");
-
-    //let yScale = this.extractYScale(changes.lineData.currentValue);
-    ////console.log("yscale set");
-
-    //let yAxis = d3.axisLeft(yScale);
-
-    ////console.log("y axis set");
-
-    //yAxis.tickFormat(this.d3format);
-    ////console.log("yaxis tick format set");
-
-    //this.xAxis = svg.append("g")
-    //  .attr("transform", "translate(0," + that.height + ")")
-    //  .call(d3.axisBottom(xScale)
-    //    .ticks(5)
-    //    .tickFormat(d3.timeFormat("%m/%d")));
-
-    ////console.log("appended x axis");
-
-    //svg.append("g")
-    //  .call(yAxis);
-
-    ////console.log("appended y axis");
-
-    //let xFunc = (d): number =>
-    //{
-    //  return +xScale(this.extractDateFunc(d).valueOf());
-    //};
-
-    //let yFunc = (d): number =>
-    //{
-    //  return +yScale(this.extractHrFunc(d));
-    //};
-
-    //this.d3Line = d3.line().curve(d3.curveCardinal.tension(1))
-    //  .x(xFunc)
-    //  .y(yFunc);
-
-    //svg.append("path")
-    //  .data([changes.lineData.currentValue])
-    //  .attr("fill", "none")
-    //  .attr("stroke", "#000")
-    //  .attr("d", this.d3Line)
-
-    this.created = true;
-    console.log("chart created");
-  }
-
-  updateChart(changes: SimpleChanges)
-  {
-
-    let xList = [];
-    let yList = [];
-    xList.push("timeStamp");
-    yList.push("stress");
-
-    changes.lineData.currentValue.forEach(obj =>
+    changes.lineData.previousValue.forEach(obj =>
     {
-      yList.push(obj['heartRate']);
-      xList.push(this.extractDateFunc(obj).valueOf());
+      let key = obj['heartRate'];
+      let val = new Date(obj['timestamp']['dateTimeString']).valueOf();
+      oldDataDictionary[key] = val;
     }
     );
 
+    changes.lineData.currentValue.forEach(obj =>
+    {
+      let key = obj['heartRate'];
+      let val = new Date(obj['timestamp']['dateTimeString']).valueOf();
 
-    var chart = c3.generate({
-      bindto: '#heartRateTable',
-      data: {
-        x: 'timeStamp',
-        columns: [
-          xList,
-          yList
-        ],
-        type: 'line'
-      },
-      axis: {
-        x: {
-          type: 'timeseries',
-          tick: {
-            format: '%Y-%m-%d'
-          }
+      xList.push(val);
+      yList.push(key);
+
+      if (!(key in oldDataDictionary))
+      {
+        console.log(key + " NOT found in old data, adding");
+        newDataDictionary[key] = val;
+        newItemCount++;
+        newXList.push(val);
+        newYList.push(key);
+      }
+    })
+
+    if (!this.created)
+    {
+      console.log("creating chart for first time");
+      console.log(xList);
+      console.log(yList);
+
+      this.chart = c3.generate({
+        bindto: '#heartRateTable',
+        transition: {
+          duration: 100
         },
-        y: {
-          max: 1,
-          min: 0,
-          label: {
-            text: 'Stress',
-            position: 'outer-middle'
+        interaction: {
+          enabled: false
+        },
+        data: {
+          x: 'timeStamp',
+          columns: [
+            xList,
+            yList
+          ],
+          type: 'line'
+        },
+        tooltip: {
+          show: false
+        },
+        legend: {
+          hide: true
+        },
+        axis: {
+          x: {
+            type: 'timeseries',
+            tick: {
+              count: 5,
+              format: '%M:%S'
+            },
+            padding: {
+              left: 0,
+              right: 0
+            },
+            height: 1,
           },
-          tick: {
-            count: 3
+          y: {
+            max: 1,
+            min: 0,
+            tick: {
+              values: [0, 1]
+            },
+            padding: {
+              bottom: 0,
+              top: 0
+            }
           }
         }
+      });
+
+      this.created = true;
+      console.log("chart created");
+    }
+    else
+    {
+      if (newItemCount > 0)
+      {
+        this.chart.flow({
+          columns: [
+            newXList,
+            newYList
+          ]
+        });
       }
-    });
-
-    //let oldDataDictionary = {};
-    //changes.lineData.previousValue.forEach(obj =>
-    //{
-    //  let key = obj['heartRate'];
-    //  let val = obj['timestamp']['dateTimeString'];
-    //  oldDataDictionary[key] = val;
-    //}
-    //);
-
-    ////let newDataDictionary = {};
-    //let newItemCount = 0;
-
-    //changes.lineData.currentValue.forEach(obj =>
-    //{
-    //  let key = obj['heartRate'];
-    //  let val = obj['timestamp']['dateTimeString'];
-    //  if (!(key in oldDataDictionary))
-    //  {
-    //    console.log(key + " NOT found in old data, adding");
-    //    //newDataDictionary[key] = val;
-    //    newItemCount++;
-    //  }
-    //})
-
-    //console.log(newItemCount + "new items");
-
-    //let element = this.chartContainer.nativeElement;
-    //let svg = d3.select(element).select("svg");
-    //let path = svg.select("path");
-
-    //let xScale = this.extractXScale(changes.lineData.currentValue);
-    //this.xAxis.call(xScale);
-
-    //path
-    //  .attr("d", this.d3Line(changes.lineData.previousValue))
-    //  .transition(this.transition)
-    //  .attr("d", this.d3Line(changes.lineData.currentValue))
-    //  //.attr("transform", "translate(" + (5 * newItemCount) + "," + (-1 * this.height) + ")");
-    //  .attr("transform", "translate(0," + (-1 * this.height) + ")");
-
-
-
-
-    //svg
-    //  .transition()
-    //  .attr("transform", "translate(0," + (-1*this.height) + ")")
-    //  .call(d3.axisBottom(xScale)
-    //    .ticks(5)
-    //    .tickFormat(d3.timeFormat("%m/%d")));
+    }
   }
-
-  //extractXScale(data: Array<JSON>)
-  //{
-  //  //console.log("extracting xscale");
-  //  //console.log("data for xscale calculation");
-  //  //console.log(this.priorLineData);
-
-  //  return d3.scaleTime()
-  //    .domain(d3.extent(data, d =>
-  //    {
-  //      //this.extractDateFunc(d).toString()
-  //      return this.extractDateFunc(d);
-  //    }))
-  //    .range([0, this.width]).nice();
-  //}
-
-  //extractYScale(data: Array<JSON>)
-  //{
-
-  //  return d3.scaleLinear()
-  //    .range([0, this.height]) //the size or scale of the area
-  //    .domain([d3.max(data,
-  //      (d) =>
-  //      {
-  //        return +this.extractHrFunc(d);
-  //      }), 0]); //the data to map to it
-  //}
 }

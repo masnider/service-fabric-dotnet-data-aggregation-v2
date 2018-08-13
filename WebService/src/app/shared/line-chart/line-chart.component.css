@@ -1,16 +1,135 @@
-/*The #chart id will be used to get a reference to the native element. The components size, colors and other attributes can be controlled with CSS. The default component styles are defined barchart.component.css: */
-
-.d3-chart
-{
-  width: 20vw;
-  height: 150px;
+/*Chart Area*/
+.c3 svg {
+  font: 10px sans-serif;
 }
 
-.d3-chart .axis path,
-.d3-chart .axis line {
-  stroke: #999;
+.c3 path, .c3 line {
+  fill: none;
+  stroke: #000;
 }
 
-.d3-chart .axis text {
-  fill: #999;
+.c3-legend-item-tile,
+.c3-xgrid-focus,
+.c3-ygrid,
+.c3-event-rect,
+.c3-bars path {
+  shape-rendering: crispEdges;
 }
+
+.c3-chart-arc path {
+  stroke: #fff;
+}
+
+.c3-chart-arc rect {
+  stroke: white;
+  stroke-width: 1;
+}
+
+.c3-chart-arc text {
+  fill: #fff;
+  font-size: 13px;
+}
+
+/*Chart Axis*/
+.c3-grid line {
+  stroke: #aaa;
+}
+
+.c3-grid text {
+  fill: #aaa;
+}
+
+.c3-xgrid, .c3-ygrid {
+  stroke-dasharray: 3 3;
+}
+
+/*Chart Text*/
+.c3-text.c3-empty {
+  fill: #808080;
+  font-size: 2em;
+}
+
+/*Line*/
+.c3-line {
+  stroke-width: 1px;
+}
+
+/*Point*/
+.c3-circle._expanded_ {
+  stroke-width: 1px;
+  stroke: white;
+}
+
+.c3-selected-circle {
+  fill: white;
+  stroke-width: 2px;
+}
+
+/*Region*/
+.c3-region {
+  fill: steelblue;
+  fill-opacity: 0.1;
+}
+
+/*-- Brush --*/
+.c3-brush .extent {
+  fill-opacity: 0.1;
+}
+
+/*-- Area --*/
+.c3-area {
+  stroke-width: 0;
+  opacity: 0.2;
+}
+
+/*-- Arc --*/
+.c3-chart-arcs-title {
+  dominant-baseline: middle;
+  font-size: 1.3em;
+}
+
+.c3-chart-arcs .c3-chart-arcs-background {
+  fill: #e0e0e0;
+  stroke: #FFF;
+}
+
+.c3-chart-arcs .c3-chart-arcs-gauge-unit {
+  fill: #000;
+  font-size: 16px;
+}
+
+.c3-chart-arcs .c3-chart-arcs-gauge-max {
+  fill: #777;
+}
+
+.c3-chart-arcs .c3-chart-arcs-gauge-min {
+  fill: #777;
+}
+
+.c3-chart-arc .c3-gauge-value {
+  fill: #000;
+  /*  font-size: 28px !important;*/
+}
+
+.c3-chart-arc.c3-target g path {
+  opacity: 1;
+}
+
+.c3-chart-arc.c3-target.c3-focused g path {
+  opacity: 1;
+}
+
+/*-- Zoom --*/
+/*.c3-drag-zoom.enabled {
+  pointer-events: all !important;
+  visibility: visible;
+}
+
+.c3-drag-zoom.disabled {
+  pointer-events: none !important;
+  visibility: hidden;
+}
+
+.c3-drag-zoom .extent {
+  fill-opacity: 0.1;
+}*/
