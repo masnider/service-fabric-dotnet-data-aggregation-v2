@@ -17,18 +17,13 @@
       <div id="userInfo" class="infoBox">
         <div id="userStats">
           <h4>Your Stress Dashboard</h4>
-          <div class="loadingMessage">Gathering data...</div>
-          <div id="userInfo-userHealthIndex" class="name-and-healthbox clearfix"></div>
-          <div id="userInfo-countyHealthIndex" class="name-and-healthbox clearfix"></div>
           <div id="userUnfo-detailStats">
             <div id="heartRateTable" class="chartStyle"></div>
-            <h3>Heart Rate</h3>
             <app-line-chart [lineData]="lineData"></app-line-chart>
           </div>
         </div>
         <div id="doctorListStats">
           <h4>Doctors in your county</h4>
-          <div class="loadingMessage">Gathering data...</div>
           <ul class="countyDoctorList"></ul>
         </div>
       </div>

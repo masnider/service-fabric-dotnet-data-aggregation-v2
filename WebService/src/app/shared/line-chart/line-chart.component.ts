@@ -77,10 +77,6 @@ export class LineChartComponent implements OnInit, OnChanges
 
     if (!this.created)
     {
-      //console.log("creating chart for first time");
-      console.log(xList);
-      console.log(yList);
-
       this.chart = c3.generate({
         bindto: '#heartRateTable',
         transition: {
