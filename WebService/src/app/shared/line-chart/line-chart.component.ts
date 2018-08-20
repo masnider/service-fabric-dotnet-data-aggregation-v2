@@ -2,8 +2,6 @@ import { Component, OnInit, OnChanges, ViewChild, ElementRef, Input, ViewEncapsu
 import * as d3 from 'd3';
 import * as c3 from 'c3';
 import { ChartAPI } from 'c3';
-//import { Transition, transition as d3Transition } from 'd3-transition';
-//import { axisBottom, axisLeft } from 'd3-axis';
 
 @Component({
   selector: 'app-line-chart',
@@ -70,7 +68,6 @@ export class LineChartComponent implements OnInit, OnChanges
 
       if (!(key in oldDataDictionary))
       {
-        console.log(key + " NOT found in old data, adding");
         newDataDictionary[key] = val;
         newItemCount++;
         newXList.push(val);
@@ -80,7 +77,7 @@ export class LineChartComponent implements OnInit, OnChanges
 
     if (!this.created)
     {
-      console.log("creating chart for first time");
+      //console.log("creating chart for first time");
       console.log(xList);
       console.log(yList);
 
@@ -97,8 +94,13 @@ export class LineChartComponent implements OnInit, OnChanges
           columns: [
             xList,
             yList
-          ],
-          type: 'line'
+            ],
+          type: 'line',
+          color: function (color, d)
+          {
+            //this colors the points but not the line
+            return d.id && d.id === 'stress' ? d3.rgb(d3.hsl(d.value*250, 100, 50)) : color;
+          }
         },
         tooltip: {
           show: false
@@ -132,9 +134,7 @@ export class LineChartComponent implements OnInit, OnChanges
           }
         }
       });
-
       this.created = true;
-      console.log("chart created");
     }
     else
     {
@@ -144,7 +144,8 @@ export class LineChartComponent implements OnInit, OnChanges
           columns: [
             newXList,
             newYList
-          ]
+          ],
+          length: newItemCount
         });
       }
     }

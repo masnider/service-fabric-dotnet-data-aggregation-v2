@@ -10,7 +10,6 @@ import * as d3 from 'd3';
 
 export class AppComponent implements OnInit {
 
-  //private healthReportCheckFrequencyInMs: number = 5000;
   private deviceId: string;
   private doctorId: string;
   private mapData: Array<any> = [];
