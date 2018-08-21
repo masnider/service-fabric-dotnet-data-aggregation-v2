@@ -12,8 +12,10 @@ export class AppComponent implements OnInit {
 
   private deviceId: string;
   private doctorId: string;
+  private countyId: string;
   private mapData: Array<any> = [];
   private lineData: Array<JSON> = null;
+  private countyDoctorData: Array<JSON> = null;
   private statsData: JSON = null;
   private averageData: IAverageDataClass = <IAverageDataClass>{
     lastReportedTime: null,
@@ -22,12 +24,13 @@ export class AppComponent implements OnInit {
   };
 
   constructor(private _httpService: Http) { }
-
+  
   ngOnInit() {
     setTimeout(() => {
       this.generateMapData();
       this.getIds();
       setInterval(() => this.getLineInfo(), 1000);
+      setInterval(() => this.getCountyDoctorInfo(), 5000);
       setInterval(() => this.generateMapData(), 3000);
       setInterval(() => this.getTotalStats(), 5000);
     }, 1000);
@@ -91,8 +94,20 @@ export class AppComponent implements OnInit {
   getLineInfo() {
     if (this.deviceId != null) {
       d3.json("/api/patients/" + this.deviceId + "/", (callback, data: any) => {
-        data = data["heartRateHistory"];
-        this.lineData = data;
+        let lineData = data["heartRateHistory"];
+        this.lineData = lineData;
+        this.countyId = data["countyInfo"]["countyId"];
+      });
+    }
+  }
+
+  getCountyDoctorInfo()
+  {
+    if (this.countyId != null)
+    {
+      d3.json("/api/county/" + this.countyId + "/doctors", (callback, data: any) =>
+      {
+        this.countyDoctorData = data;
       });
     }
   }

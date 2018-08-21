@@ -98,9 +98,6 @@ export class LineChartComponent implements OnInit, OnChanges
             return d.id && d.id === 'stress' ? d3.rgb(d3.hsl(d.value*250, 100, 50)) : color;
           }
         },
-        tooltip: {
-          show: false
-        },
         legend: {
           hide: true
         },
@@ -110,22 +107,13 @@ export class LineChartComponent implements OnInit, OnChanges
             tick: {
               count: 5,
               format: '%M:%S'
-            },
-            padding: {
-              left: 0,
-              right: 0
-            },
-            height: 1,
+            }
           },
           y: {
             max: 1,
             min: 0,
             tick: {
               values: [0, 1]
-            },
-            padding: {
-              bottom: 0,
-              top: 0
             }
           }
         }

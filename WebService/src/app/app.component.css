@@ -159,7 +159,7 @@ footer {
   color: #FF8A00;
 }
 
-#userStats #userUnfo-detailStats {
+/*#userStats #userUnfo-detailStats {
   margin-top: 10px;
 }
 
@@ -175,7 +175,7 @@ footer {
 
 #userStats .name-and-healthbox {
   margin-bottom: 5px;
-}
+}*/
 
 #doctorListStats {
   min-height: 300px;

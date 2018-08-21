@@ -18,13 +18,12 @@
         <div id="userStats">
           <h4>Your Stress Dashboard</h4>
           <div id="userUnfo-detailStats">
-            <div id="heartRateTable" class="chartStyle"></div>
             <app-line-chart [lineData]="lineData"></app-line-chart>
           </div>
         </div>
         <div id="doctorListStats">
           <h4>Doctors in your county</h4>
-          <ul class="countyDoctorList"></ul>
+          <app-bar-chart [countyDoctorData]="countyDoctorData"></app-bar-chart>
         </div>
       </div>
     </div>
