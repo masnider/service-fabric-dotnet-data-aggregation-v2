@@ -39,6 +39,21 @@ export class BarChartComponent implements OnInit, OnChanges
   createChart(changes: SimpleChanges)
   {
 
+    let doctorList = [];
+    let doctorHealthDictionary = {};
+
+    changes.countyDoctorData.currentValue.forEach(obj =>
+    {
+      let doctor = [];
+      let DoctorId = obj["key"];
+      let DoctorAvgHealth = obj["value"]["averageHealthIndex"]["value"];
+      doctor.push(DoctorId);
+      doctor.push(DoctorAvgHealth);
+      doctorList.push(doctor);
+      doctorHealthDictionary[DoctorId] = DoctorAvgHealth;
+    }
+    );
+
     if (!this.created)
     {
       this.chart = c3.generate({
@@ -50,12 +65,20 @@ export class BarChartComponent implements OnInit, OnChanges
           enabled: false
         },
         data: {
-          columns: [
-            ['bob', 1],
-            ['charlie', 2]
-          ],
+          columns: doctorList,
           type: 'bar',
-          order: 'asc'
+          order: 'asc',
+          color: function (color, d)
+          {
+            if (!(d.id in doctorHealthDictionary))
+            {
+              return color;
+            }
+            else
+            {
+              return d3.rgb(d3.hsl(doctorHealthDictionary[d.id] * 250, 100, 50))
+            }
+          }
         },
         tooltip: {
           show: false
