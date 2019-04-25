@@ -23,7 +23,6 @@ namespace System.Net.Http
     public static class FabricHttpClient
     {
         private static readonly ConcurrentDictionary<Uri, bool?> addresses;
-        private static readonly FabricClient fabricClient;
         private static readonly HttpClient httpClient;
         private static readonly HttpCommunicationClientFactory clientFactory;
         private static readonly JsonSerializer jSerializer;
@@ -31,7 +30,6 @@ namespace System.Net.Http
         static FabricHttpClient()
         {
             addresses = new ConcurrentDictionary<Uri, bool?>();
-            fabricClient = new FabricClient();
             HttpClientHandler handler = new HttpClientHandler();
 
             if (handler.SupportsAutomaticDecompression)

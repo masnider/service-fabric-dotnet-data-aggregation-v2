@@ -38,17 +38,18 @@ export class DataMapComponent implements OnInit, OnChanges {
             .translate([1400 / 2, 650 / 2]);
 
         var path = d3.geoPath()
-            .projection(projection);
+        .projection(projection);
 
-        d3.json("us-10m.json", function (topology: any) {
-            svg.selectAll(".region")
-                .data(topojson.feature(topology, topology.objects.counties).features)
-                .enter()
-                .append("path")
-                .attr("d", path)
-                .attr('fill', function (d) { return '#313131'; })
-                .attr("id", function (d) { return "p" + d.id; });
-        });
+        //d3.json("us-10m.json", function (topology: any) {
+        //    svg.selectAll(".region")
+        //        .data(topojson.feature(topology, topology.objects.counties).features)
+        //        .enter()
+        //        .append("path")
+        //        .attr("d", path)
+        //        .attr('fill', function (d) { return '#313131'; })
+        //        .attr("id", function (d) { return "p" + d.id; });
+        //});
+
     }
 
     updateMap() {
