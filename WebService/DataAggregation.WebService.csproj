@@ -20,16 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\us-10m.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="src\us-10m.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
@@ -54,6 +44,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="src\us-10m - Copy.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="src\us-10m.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

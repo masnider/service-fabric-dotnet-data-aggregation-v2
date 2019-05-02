@@ -33,7 +33,7 @@
         internal const string ConfigSectionName = "DataAggregation.CountyService.Settings";
         internal const string CountyNameDictionaryName = "CountyNames";
         internal const string CountyHealthDictionaryName = "{0}-Health";
-        object ConfigPackageLockObject = new object();
+        internal readonly object ConfigPackageLockObject = new object();
         private KeyedCollection<string, ConfigurationProperty> configPackageSettings;
         private readonly HealthIndexCalculator indexCalculator;
 
@@ -68,6 +68,10 @@
 
                         return new WebHostBuilder()
                                     .UseKestrel()
+                                    //.ConfigureAppConfiguration((builderContext, config) =>
+                                    //{
+                                    //    IHostingEnvironment env = builderContext.HostingEnvironment;
+                                    //})
                                     .ConfigureServices(
                                         services => services
                                             .AddSingleton<StatefulServiceContext>(serviceContext)
@@ -168,15 +172,15 @@
 
                         ServiceUriBuilder serviceUri = new ServiceUriBuilder(this.GetSetting("NationalServiceInstanceName"));
 
-                         await FabricHttpClient.MakePostRequest<CountyStatsViewModel>(
-                            serviceUri.ToUri(),
-                            new ServicePartitionKey(),
-                            "NationalEndpoint",
-                            "/national/health/" + county.Key,
-                            payload,
-                            SerializationSelector.PBUF,
-                            cancellationToken
-                            );
+                        await FabricHttpClient.MakePostRequest<CountyStatsViewModel>(
+                           serviceUri.ToUri(),
+                           new ServicePartitionKey(),
+                           "NationalEndpoint",
+                           "/national/health/" + county.Key,
+                           payload,
+                           SerializationSelector.PBUF,
+                           cancellationToken
+                           );
 
                     }
                 }

@@ -14,8 +14,8 @@ $appInitialVersion = "1.0.0"
 
 if($singleNode)
 {
-    $webServiceInstanceCount = -1
-    $deviceCreationInstanceCount = -1
+    $webServiceInstanceCount = 1
+    $deviceCreationInstanceCount = 1
     $countyServicePartitionCount = 1
     $deviceActorServicePartitionCount = 1
     $doctorServicePartitionCount = 1

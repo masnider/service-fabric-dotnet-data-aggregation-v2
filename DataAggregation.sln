@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28822.285
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "DataAggregation", "DataAggregation\DataAggregation.sfproj", "{FF09C711-C0E8-4191-B639-779ED1DED513}"
 EndProject
@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAggregation.DoctorServi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAggregation.CountyService", "DataAggregation.CountyService\DataAggregation.CountyService.csproj", "{7F0C1B1F-5854-4850-8146-1F591D85484E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAggregation.NationalService", "DataAggregation.NationalService\DataAggregation.NationalService.csproj", "{AF250BAB-10C2-42F6-8239-00E3EE458307}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAggregation.NationalService", "DataAggregation.NationalService\DataAggregation.NationalService.csproj", "{AF250BAB-10C2-42F6-8239-00E3EE458307}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +30,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{FF09C711-C0E8-4191-B639-779ED1DED513}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{FF09C711-C0E8-4191-B639-779ED1DED513}.Debug|Any CPU.Build.0 = Debug|x64
+		{FF09C711-C0E8-4191-B639-779ED1DED513}.Debug|Any CPU.Deploy.0 = Debug|x64
 		{FF09C711-C0E8-4191-B639-779ED1DED513}.Debug|x64.ActiveCfg = Debug|x64
 		{FF09C711-C0E8-4191-B639-779ED1DED513}.Debug|x64.Build.0 = Debug|x64
 		{FF09C711-C0E8-4191-B639-779ED1DED513}.Debug|x64.Deploy.0 = Debug|x64
