@@ -1,8 +1,7 @@
 import { Component, OnInit, OnChanges, ViewChild, ElementRef, Input, ViewEncapsulation } from '@angular/core';
 import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
-import { Topology } from 'topojson-specification';
-import { FeatureCollection } from 'geojson';
+import { FeatureCollection, GeometryCollection, Feature } from 'geojson';
 
 @Component({
   selector: 'app-data-map',
@@ -20,6 +19,7 @@ export class DataMapComponent implements OnInit, OnChanges {
 
   constructor() { }
 
+
   ngOnInit() {
     this.createMap();
     if (this.mapData) {
@@ -33,40 +33,36 @@ export class DataMapComponent implements OnInit, OnChanges {
     }
   }
 
-  createMap() {
+  private async createMap() {
+
     const svg = d3.select("#usMap");
+    var g = svg.append("g");
 
-    var projection = d3.geoAlbersUsa()
-      .scale(1350)
-      .translate([1400 / 2, 650 / 2]);
+    var projection = d3.geoAlbersUsa();
 
-    var path = d3.geoPath()
-      .projection(projection);
+    var path = d3.geoPath();
 
-    console.log("fetching json");
+    var topodata: any = await d3.json("https://d3js.org/us-10m.v1.json");
 
+    console.log("data fetched");
 
-    var promise1 = d3.json("https://d3js.org/us-10m.v1.json");
-    Promise.all([promise1]).then(function (us: any) {
+    console.log(topodata);
+    console.log(topodata.objects);
+    console.log(topodata.objects.counties)
+    
+    //var nationalMesh = topojson.mesh(topodata, topodata.objects.nation); //WORKS
+    //var stateMesh = topojson.feature(topodata, topodata.objects.states); //WORKS
+    var countyMesh = (topojson.feature(topodata, topodata.objects.counties) as unknown) as FeatureCollection; //WORKS
 
-      console.log(us[0]);
-
-      var feature = (topojson.feature(us[0], us[0].objects.counties) as unknown) as FeatureCollection
-      console.log(feature.features);
-
-      svg.selectAll(".region")
-        .data(feature.features)
-        .enter()
-        .append("path")
-        .attr("d", path)
-        .attr('fill', function (d) { return '#313131'; })
-        .attr("id", function (d) { return "p" + d.id; });
-
-      //svg.append("path")
-      //  .datum(topojson.mesh(us[0], us[0].objects.states, function (a, b) { return a !== b; }))
-      //  //.attr("class", "states")
-      //  .attr("d", path);
-    });
+    console.log(countyMesh);
+    g.selectAll("path")
+      .data(countyMesh.features)
+      .enter()
+      .append("path")
+      .attr("d", path)
+      .attr('fill', function (d) { return '#313131'; })
+      .attr("id", function (d) { return "p" + d.id; });
+    
   }
 
   updateMap() {
