@@ -13,9 +13,9 @@ import { FeatureCollection, GeometryCollection, Feature } from 'geojson';
 export class DataMapComponent implements OnInit, OnChanges {
   @ViewChild('chart') private chartContainer: ElementRef;
   @Input() private mapData: Array<any>;
-  private chart: any;
-  private width: number;
-  private height: number;
+
+  private retrievedData = new Array<string>();
+  private updateData = new Array<string>();
 
   constructor() { }
 
@@ -30,6 +30,7 @@ export class DataMapComponent implements OnInit, OnChanges {
   ngOnChanges() {
     if (this.mapData) {
       this.updateMap();
+      this.compareData();
     }
   }
 
@@ -46,27 +47,34 @@ export class DataMapComponent implements OnInit, OnChanges {
 
     console.log("data fetched");
 
-    console.log(topodata);
-    console.log(topodata.objects);
-    console.log(topodata.objects.counties)
-    
+    //console.log(topodata);
+    //console.log(topodata.objects);
+    //console.log(topodata.objects.counties)
+
     //var nationalMesh = topojson.mesh(topodata, topodata.objects.nation); //WORKS
     //var stateMesh = topojson.feature(topodata, topodata.objects.states); //WORKS
     var countyMesh = (topojson.feature(topodata, topodata.objects.counties) as unknown) as FeatureCollection; //WORKS
 
-    console.log(countyMesh);
     g.selectAll("path")
       .data(countyMesh.features)
       .enter()
       .append("path")
       .attr("d", path)
       .attr('fill', function (d) { return '#313131'; })
-      .attr("id", function (d) { return "p" + d.id; });
-    
+      .attr("id", (d) => {
+        //console.log(d);
+        this.retrievedData.push(d.id);
+        return "p" + d.id;
+      });
+
   }
 
   updateMap() {
+    this.updateData = new Array<string>();
+
     this.mapData.forEach((data) => {
+      this.updateData.push(data[0]);
+      //console.log(data[0]);
       d3.select("path#p" + data[0])
         .transition()
         .duration(100)
@@ -83,5 +91,22 @@ export class DataMapComponent implements OnInit, OnChanges {
     else {
       return 'hsl(' + HealthIndex.value + ', 100%, 50%)';
     }
+  }
+
+  sortString(s1, s2) {
+    if (s1 > s2) {
+      return 1;
+    }
+
+    if (s1 < s2) {
+      return -1;
+    }
+
+    return 0;
+  }
+
+  compareData() {
+    console.log(this.retrievedData.sort((s1, s2) => { return this.sortString(s1, s1); }));
+    console.log(this.updateData.sort((s1, s2) => { return this.sortString(s1, s1); }));
   }
 }

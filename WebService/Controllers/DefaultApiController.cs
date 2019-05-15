@@ -75,17 +75,19 @@ namespace DataAggregation.WebService
       Random r = new Random();
       List<string[]> mapData = new List<string[]>();
 
+      //3,242 counties in the US per wikipedia, so what's up here....
+      //3,141 counties in the US per USGS, so what's up here....
+
       for (int i = 1001; i <= 56045; i++)
       {
-
         var num = i.ToString();
 
         if (num.Length == 4)
         {
-          num.PadLeft(5, '0');
+          num = num.PadLeft(5, '0');
         }
 
-        mapData.Add(new string[] { i.ToString(), r.Next(0, 101).ToString() });
+        mapData.Add(new string[] { num.ToString(), r.Next(0, 101).ToString() });
       }
 
       return mapData;
@@ -114,7 +116,7 @@ namespace DataAggregation.WebService
 
       return JsonConvert.SerializeObject(chartData.ToArray());
 
-      //      1 - May - 12,58.13
+      //1 - May - 12,58.13
       //30 - Apr - 12,53.98
       //27 - Apr - 12,67
       //26 - Apr - 12,89.7
